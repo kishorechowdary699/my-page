@@ -17,7 +17,11 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:12px 0
 .menu-btn{background:none;border:none;font-size:32px;color:var(--navy)}
 .mobile{display:none;background:white;padding:15px}
 .mobile a{display:block;padding:12px 0;color:var(--navy);text-decoration:none;font-weight:600}
-.hero{padding:40px 0;background:linear-gradient(#f5f8fd,#eef3fb)}
+.hero{
+padding:40px 0;
+min-height:700px;
+background:linear-gradient(#f5f8fd,#eef3fb);
+}
 .hero-grid,.about-grid{display:grid;gap:30px;align-items:center}
 h1,h2{font-family:Fredoka,sans-serif}
 h1{font-size:3.4rem;line-height:.95}
@@ -28,8 +32,17 @@ h2{font-size:2.4rem}
 .features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:30px 0}
 .feature,.card,.menubox,.cta{background:white;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
 .feature{padding:18px;text-align:center}
-section{padding:60px 0}
-.about-grid img,.hero img{max-height:450px;margin:auto}
+section{padding:60px 0}.hero img{
+height:600px;
+width:auto;
+margin:auto;
+}
+
+.about-grid img{
+height:500px;
+width:auto;
+margin:auto;
+}
 .menubox{padding:50px 20px;text-align:center;border:2px dashed #8cb0e1}
 .speciality{display:flex;overflow:auto;gap:16px;padding-bottom:10px}
 .card{min-width:220px;padding:12px}
