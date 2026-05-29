@@ -1,53 +1,72 @@
-html = r"""<!DOCTYPE html>
+html = r'''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bread & Beyond</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
---bg:#5886C4;--navy:#13263F;--white:#FFFFFF;--red:#A22E2E;
-}
+:root{--bg:#5886C4;--navy:#13263F;--white:#fff;--red:#A22E2E;}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Poppins,sans-serif;background:var(--bg);color:#fff;overflow-x:hidden}
+body{font-family:Poppins,sans-serif;background:#eef3fb;color:var(--navy);overflow-x:hidden}
 .container{width:min(1200px,92%);margin:auto}
-header{position:sticky;top:0;background:rgba(19,38,63,.85);backdrop-filter:blur(10px);z-index:1000}
-nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
-nav img{height:70px}
-.links a{color:#fff;text-decoration:none;margin:0 12px}
-.btn{background:var(--red);padding:12px 22px;border-radius:999px;color:#fff;text-decoration:none;font-weight:600}
-.hero{padding:70px 0}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
-h1{font-family:Fredoka,sans-serif;font-size:5rem;line-height:1}
-.hero p{margin:25px 0;font-size:1.1rem;max-width:600px}
-.hero img{max-width:100%}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
-.card,.feature{background:#ffffff15;border:1px solid #ffffff30;border-radius:24px;padding:20px}
-section{padding:70px 0}
-.menu{border:3px dashed #fff;border-radius:30px;padding:70px 20px;text-align:center}
-.speciality .card img{width:100%;height:180px;object-fit:cover;border-radius:18px;background:#fff}
-.footer{background:var(--navy);padding:50px 0}
-.doodle{position:fixed;opacity:.12;font-size:50px;pointer-events:none}
-.d1{top:120px;left:3%}.d2{top:240px;right:4%}.d3{bottom:150px;left:6%}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr}h1{font-size:3rem}.links{display:none}}
+img{max-width:100%;display:block}
+header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);z-index:1000;border-bottom:1px solid #dbe5f4}
+nav{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
+.logo{height:70px}
+.menu-btn{background:none;border:none;font-size:32px;color:var(--navy)}
+.mobile{display:none;background:white;padding:15px}
+.mobile a{display:block;padding:12px 0;color:var(--navy);text-decoration:none;font-weight:600}
+.hero{padding:40px 0;background:linear-gradient(#f5f8fd,#eef3fb)}
+.hero-grid,.about-grid{display:grid;gap:30px;align-items:center}
+h1,h2{font-family:Fredoka,sans-serif}
+h1{font-size:3.4rem;line-height:.95}
+h2{font-size:2.4rem}
+.btn{display:inline-block;background:var(--red);color:#fff;padding:14px 24px;border-radius:999px;text-decoration:none;font-weight:600}
+.btn-outline{border:2px solid var(--navy);color:var(--navy);background:white}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:30px 0}
+.feature,.card,.menubox,.cta{background:white;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.feature{padding:18px;text-align:center}
+section{padding:60px 0}
+.about-grid img,.hero img{max-height:450px;margin:auto}
+.menubox{padding:50px 20px;text-align:center;border:2px dashed #8cb0e1}
+.speciality{display:flex;overflow:auto;gap:16px;padding-bottom:10px}
+.card{min-width:220px;padding:12px}
+.placeholder{height:150px;background:#dfe9f8;border-radius:16px;margin-bottom:12px}
+.cta{background:var(--navy);color:white;padding:40px;text-align:center}
+footer{background:var(--navy);color:white;padding:50px 0}
+.float{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:700}
+.doodle{position:absolute;color:#9bb6df;opacity:.4;font-size:34px}
+@media(min-width:768px){
+.hero-grid,.about-grid{grid-template-columns:1fr 1fr}
+.features{grid-template-columns:repeat(5,1fr)}
+.speciality{display:grid;grid-template-columns:repeat(5,1fr)}
+.card{min-width:0}
+h1{font-size:5.5rem}
+}
 </style>
+<script>
+function toggleMenu(){
+ const m=document.getElementById('mobile');
+ m.style.display=(m.style.display==='block')?'none':'block';
+}
+</script>
 </head>
 <body>
-<div class="doodle d1">🥐</div><div class="doodle d2">🥖</div><div class="doodle d3">🧁</div>
 
 <header>
 <div class="container">
 <nav>
-<img src="logo.png" alt="Bread and Beyond">
-<div class="links">
+<img src="logo.png" class="logo" alt="Bread & Beyond">
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+</nav>
+<div id="mobile" class="mobile">
 <a href="#about">About</a>
 <a href="#menu">Menu</a>
 <a href="#speciality">Our Speciality</a>
 <a href="#contact">Contact</a>
 </div>
-<a class="btn" href="https://wa.me/917842177972">Order on WhatsApp</a>
-</nav>
 </div>
 </header>
 
@@ -55,74 +74,80 @@ section{padding:70px 0}
 <div class="container hero-grid">
 <div>
 <h1>Freshly Baked.<br>Thoughtfully Crafted.</h1>
-<p>Handcrafted cakes, breads and desserts made with premium ingredients and a whole lot of love.</p>
-<a class="btn" href="https://wa.me/917842177972">Order Now</a>
+<p style="margin-top:18px">Delicious breads, cakes and desserts made fresh every day with the finest ingredients and a whole lot of love.</p>
+<div class="actions">
+<a class="btn" href="https://wa.me/917842177972">Order on WhatsApp</a>
+<a class="btn btn-outline" href="#menu">View Menu</a>
+</div>
 </div>
 <div>
-<img src="baker-running.png" alt="Baker mascot">
+<img src="baker-running.png" alt="Baker">
 </div>
 </div>
-</section>
 
-<section>
-<div class="container cards">
+<div class="container">
+<div class="features">
 <div class="feature">🥐 Freshly Baked Daily</div>
+<div class="feature">🥣 Premium Ingredients</div>
 <div class="feature">🎂 Custom Cakes</div>
-<div class="feature">🚚 Local Delivery</div>
-<div class="feature">❤️ Handmade in Small Batches</div>
+<div class="feature">🛵 Local Delivery</div>
+<div class="feature">❤️ Handmade</div>
+</div>
 </div>
 </section>
 
 <section id="about">
-<div class="container hero-grid">
+<div class="container about-grid">
 <div>
-<h2 style="font-family:Fredoka;font-size:3rem">Made With Butter & Love</h2>
-<p style="margin-top:20px">Bread & Beyond is a small-batch bakery built on passion, quality and creativity. Every creation is crafted with care.</p>
+<h2>Made With Butter & Love</h2>
+<p style="margin-top:15px">Bread & Beyond is a small-batch bakery built on passion, quality and creativity. Every creation is crafted with care to bring you the perfect blend of taste and happiness.</p>
+<div class="actions"><a class="btn" href="https://wa.me/917842177972">Order Now</a></div>
 </div>
-<div>
-<img src="baker-croissant.png" alt="Croissant mascot">
-</div>
+<div><img src="baker-croissant.png" alt="Mascot"></div>
 </div>
 </section>
 
 <section id="menu">
 <div class="container">
-<div class="menu">
-<h2 style="font-family:Fredoka;font-size:3rem">Our Menu</h2>
-<p>Menu card coming soon. This section is ready for your future menu design.</p>
+<div class="menubox">
+<h2>Our Menu</h2>
+<p>Your future menu card will be added here.</p>
 </div>
 </div>
 </section>
 
-<section id="speciality" class="speciality">
+<section id="speciality">
 <div class="container">
-<h2 style="font-family:Fredoka;font-size:3rem;text-align:center;margin-bottom:30px">Our Speciality</h2>
-<div class="cards">
-<div class="card"><img src="images/speciality-placeholder-1.jpg"><h3>Milk Bread</h3></div>
-<div class="card"><img src="images/speciality-placeholder-2.jpg"><h3>Chocolate Cake Tub</h3></div>
-<div class="card"><img src="images/speciality-placeholder-3.jpg"><h3>Mango Cake Tub</h3></div>
-<div class="card"><img src="images/speciality-placeholder-4.jpg"><h3>Tres Leches</h3></div>
-<div class="card"><img src="images/speciality-placeholder-5.jpg"><h3>Baked Mac & Cheese</h3></div>
+<h2 style="text-align:center;margin-bottom:20px">Our Speciality</h2>
+<div class="speciality">
+<div class="card"><div class="placeholder"></div><strong>Milk Bread</strong></div>
+<div class="card"><div class="placeholder"></div><strong>Chocolate Cake Tub</strong></div>
+<div class="card"><div class="placeholder"></div><strong>Mango Cake Tub</strong></div>
+<div class="card"><div class="placeholder"></div><strong>Tres Leches</strong></div>
+<div class="card"><div class="placeholder"></div><strong>Baked Mac & Cheese</strong></div>
 </div>
 </div>
 </section>
 
 <section>
-<div class="container" style="text-align:center;background:#13263F;padding:50px;border-radius:30px">
-<h2 style="font-family:Fredoka;font-size:3rem">Need a Custom Cake?</h2>
-<p style="margin:15px 0">Birthdays • Weddings • Anniversaries • Corporate Events</p>
+<div class="container">
+<div class="cta">
+<h2>Need a Custom Cake?</h2>
+<p>Birthdays • Weddings • Anniversaries • Corporate Events</p><br>
 <a class="btn" href="https://wa.me/917842177972">Let's Discuss on WhatsApp</a>
+</div>
 </div>
 </section>
 
-<footer class="footer" id="contact">
+<footer id="contact">
 <div class="container">
-<img src="logo.png" alt="" style="height:90px">
+<img src="logo.png" class="logo" alt="logo">
 <p>+91 78421 77972</p>
 <p>@breadandbeyond.in</p>
 <p>breadandbeyond.in</p>
 </div>
 </footer>
-</body>
-</html>"""
 
+<a class="float" href="https://wa.me/917842177972">WhatsApp</a>
+</body>
+</html>''' 
