@@ -4,27 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bread & Beyond | Freshly Baked. Thoughtfully Crafted.</title>
-<meta name="description" content="Bread & Beyond - A small-batch bakery built on passion, quality and creativity. Fresh breads, cakes and more made daily.">
+<meta name="description" content="Bread & Beyond - A small-batch bakery built on passion, quality and creativity. Delicious breads, cakes and more made fresh daily.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 /* ===== CSS Variables ===== */
 :root {
   --navy: #13263F;
-  --navy-dark: #0d1b2e;
-  --red: #C53030;
-  --red-hover: #9B2C2C;
+  --navy-dark: #0f2138;
+  --navy-banner: #132742;
+  --red: #A82828;
+  --red-hover: #8f2020;
   --white: #ffffff;
-  --cream: #FDF8F0;
-  --light-blue: #eef3fb;
-  --light-blue-2: #dbe5f4;
+  --text-muted: #586e88;
   --accent-blue: #5886C4;
-  --muted-blue: #9bb6df;
-  --text-gray: #555;
-  --card-shadow: 0 8px 30px rgba(0,0,0,0.08);
-  --card-shadow-hover: 0 12px 40px rgba(0,0,0,0.12);
+  --border-blue: #7ba2d8;
+  --card-shadow: 0 10px 30px rgba(19, 38, 63, 0.07);
 }
 
 /* ===== Reset & Base ===== */
@@ -42,7 +39,14 @@ body {
   font-family: 'Poppins', sans-serif;
   color: var(--navy);
   overflow-x: hidden;
-  background-color: var(--light-blue);
+  /* Darker, clearly visible doodle background matching reference */
+  background-color: #dbe7f6;
+  background-image: 
+    linear-gradient(rgba(235, 243, 253, 0.45), rgba(235, 243, 253, 0.45)),
+    url('bakery-doodles-blue-5886C4.png');
+  background-repeat: repeat;
+  background-size: 1100px;
+  background-attachment: scroll;
 }
 
 img {
@@ -56,67 +60,70 @@ a {
 }
 
 .container {
-  width: min(1200px, 92%);
+  width: min(1140px, 92%);
   margin: 0 auto;
 }
 
-/* ===== Typography ===== */
-h1, h2, h3 {
+/* Typography */
+h1, h2, h3, h4 {
   font-family: 'Fredoka', sans-serif;
 }
 
-.script-text {
-  font-family: 'Dancing Script', cursive;
+.script-tag {
+  font-family: 'Caveat', cursive;
   color: var(--red);
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.45rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 /* ===== Header ===== */
 header {
   position: sticky;
   top: 0;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
-  border-bottom: 1px solid var(--light-blue-2);
-  transition: box-shadow 0.3s;
-}
-
-header.scrolled {
-  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  border-bottom: 1px solid rgba(180, 205, 235, 0.45);
 }
 
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0;
+  padding: 10px 0;
 }
 
 .logo {
-  height: 70px;
+  height: 58px;
+  width: auto;
 }
 
 .nav-links {
   display: none;
   list-style: none;
-  gap: 30px;
+  gap: 28px;
   align-items: center;
 }
 
 .nav-links li a {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   color: var(--navy);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   position: relative;
-  transition: color 0.3s;
+  transition: color 0.25s;
+  padding: 6px 0;
 }
 
-.nav-links li a:hover,
+.nav-links li a:hover {
+  color: var(--red);
+}
+
 .nav-links li a.active {
   color: var(--red);
 }
@@ -124,15 +131,15 @@ nav {
 .nav-links li a.active::after {
   content: '';
   position: absolute;
-  bottom: -4px;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 2.5px;
   background: var(--red);
-  border-radius: 2px;
+  border-radius: 999px;
 }
 
-.whatsapp-btn {
+.btn-header-wa {
   display: none;
   align-items: center;
   gap: 8px;
@@ -140,32 +147,35 @@ nav {
   color: var(--white);
   padding: 10px 20px;
   border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  transition: background 0.3s, transform 0.2s;
-  white-space: nowrap;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
+  transition: background 0.25s, transform 0.2s;
 }
 
-.whatsapp-btn:hover {
+.btn-header-wa:hover {
   background: var(--red-hover);
   transform: translateY(-1px);
+}
+
+.btn-header-wa i {
+  font-size: 1.1rem;
 }
 
 .menu-btn {
   background: none;
   border: none;
-  font-size: 28px;
+  font-size: 26px;
   color: var(--navy);
   cursor: pointer;
   display: block;
 }
 
-/* Mobile Menu */
 .mobile-menu {
   display: none;
   background: var(--white);
-  padding: 15px 20px;
-  border-top: 1px solid var(--light-blue-2);
+  padding: 14px 20px 20px;
+  border-top: 1px solid #dce7f6;
 }
 
 .mobile-menu.active {
@@ -174,349 +184,396 @@ nav {
 
 .mobile-menu a {
   display: block;
-  padding: 14px 0;
+  padding: 12px 0;
   color: var(--navy);
   font-weight: 600;
   font-size: 0.95rem;
-  border-bottom: 1px solid var(--light-blue);
+  border-bottom: 1px solid #eef4fc;
 }
 
 .mobile-menu a:last-child {
   border-bottom: none;
 }
 
-.mobile-menu .mobile-whatsapp {
-  display: inline-block;
-  margin-top: 12px;
+.mobile-menu .mobile-wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
   background: var(--red);
   color: white;
-  padding: 12px 24px;
+  padding: 12px 22px;
   border-radius: 999px;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* ===== Sections General ===== */
+section {
+  position: relative;
+  background: transparent; /* Allows doodles to show through */
 }
 
 /* ===== Hero Section ===== */
 .hero {
-  padding: 40px 0 20px;
+  padding: 50px 0 35px;
   position: relative;
-  overflow: hidden;
-  background: var(--white);
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('bakery-doodles-blue-5886C4.png');
-  background-repeat: repeat;
-  background-size: 800px;
-  opacity: 0.03;
-  pointer-events: none;
 }
 
 .hero-grid {
   display: grid;
-  gap: 20px;
+  gap: 30px;
   align-items: center;
+}
+
+.hero-content {
   position: relative;
   z-index: 2;
 }
 
-.hero-content {
-  padding: 20px 0;
+.red-accents-top {
+  display: inline-block;
+  color: var(--red);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+  line-height: 1;
 }
 
 .hero-content h1 {
-  font-size: 3rem;
-  line-height: 1;
+  font-size: 3.2rem;
+  line-height: 1.04;
   color: var(--navy);
-  margin-bottom: 8px;
+  font-weight: 700;
+  position: relative;
 }
 
-.hero-divider {
-  width: 80px;
-  height: 3px;
-  background: var(--red);
-  margin: 16px 0;
-  border-radius: 2px;
-}
-
-.heart-icon {
-  color: var(--red);
-  font-size: 1.2rem;
-  margin-left: 8px;
+.hero-heart-blue {
   display: inline-block;
-  animation: heartbeat 1.5s ease-in-out infinite;
+  color: #729ad0;
+  font-size: 1.1rem;
+  vertical-align: super;
+  margin-left: 2px;
 }
 
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+.hero-divider-heart {
+  display: block;
+  color: var(--red);
+  font-size: 1.15rem;
+  margin: 14px 0 14px 2px;
+}
+
+.hero-desc-wrap {
+  position: relative;
+  max-width: 440px;
 }
 
 .hero-desc {
-  color: var(--text-gray);
-  line-height: 1.7;
-  margin-top: 16px;
-  font-size: 0.95rem;
+  color: #2c425e;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  font-weight: 400;
 }
 
-.hero-image {
+.hero-heart-outline {
+  position: absolute;
+  top: -8px;
+  right: -25px;
+  color: var(--red);
+  font-size: 1.35rem;
+  transform: rotate(12deg);
+  opacity: 0.85;
+}
+
+.hero-actions {
   display: flex;
-  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
+
+.btn-red {
+  display: inline-flex;
   align-items: center;
-}
-
-.hero-image img {
-  height: 400px;
-  width: auto;
-  object-fit: contain;
-}
-
-/* ===== Buttons ===== */
-.btn {
-  display: inline-block;
-  padding: 14px 28px;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.3s;
-  cursor: pointer;
-  border: none;
-}
-
-.btn-primary {
+  gap: 8px;
   background: var(--red);
   color: var(--white);
+  padding: 13px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.5px;
+  transition: all 0.25s;
+  box-shadow: 0 4px 15px rgba(168, 40, 40, 0.25);
 }
 
-.btn-primary:hover {
+.btn-red:hover {
   background: var(--red-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(197, 48, 48, 0.3);
+  box-shadow: 0 6px 20px rgba(168, 40, 40, 0.35);
 }
 
-.btn-outline {
-  border: 2px solid var(--navy);
-  color: var(--navy);
+.btn-outline-navy {
+  display: inline-flex;
+  align-items: center;
   background: var(--white);
+  color: var(--navy);
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.5px;
+  border: 1.5px solid var(--navy);
+  transition: all 0.25s;
 }
 
-.btn-outline:hover {
+.btn-outline-navy:hover {
   background: var(--navy);
   color: var(--white);
   transform: translateY(-2px);
 }
 
-.actions {
+/* Boy Baker Placement */
+.hero-image-wrap {
   display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-top: 24px;
-}
-
-/* ===== Features Strip ===== */
-.features-section {
-  padding: 0 0 40px;
-  position: relative;
-  z-index: 3;
-  margin-top: -30px;
-}
-
-.features-strip {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  background: var(--white);
-  border-radius: 24px;
-  padding: 24px;
-  box-shadow: var(--card-shadow);
-}
-
-.feature-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 16px 8px;
-  border-radius: 16px;
-  transition: transform 0.3s, background 0.3s;
-}
-
-.feature-item:hover {
-  background: var(--light-blue);
-  transform: translateY(-3px);
-}
-
-.feature-icon {
-  width: 50px;
-  height: 50px;
-  margin-bottom: 10px;
-}
-
-.feature-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-.feature-item span {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--navy);
-  line-height: 1.3;
-}
-
-/* ===== About Section ===== */
-.about-section {
-  padding: 80px 0;
-  background: var(--white);
-  position: relative;
-  overflow: hidden;
-}
-
-.about-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('bakery-doodles-blue-5886C4.png');
-  background-repeat: repeat;
-  background-size: 800px;
-  opacity: 0.02;
-  pointer-events: none;
-}
-
-.about-grid {
-  display: grid;
-  gap: 40px;
+  justify-content: center;
   align-items: center;
   position: relative;
   z-index: 2;
 }
 
-.about-content .script-text {
-  margin-bottom: 8px;
-  display: block;
+.hero-baker-img {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 25px rgba(19, 38, 63, 0.12));
+}
+
+/* ===== Features Strip ===== */
+.features-section {
+  padding: 25px 0 45px;
+  position: relative;
+  z-index: 5;
+}
+
+.features-card {
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: var(--card-shadow);
+  padding: 28px 20px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* Decorative red ticks on the features box */
+.features-tick-left {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  color: var(--red);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.features-tick-right {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  color: var(--red);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.feature-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px 10px;
+  position: relative;
+}
+
+.feature-icon-svg {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 12px;
+}
+
+.feature-col span {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.35;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ===== About Us Section ===== */
+.about-section {
+  padding: 45px 0 55px;
+}
+
+.about-grid {
+  display: grid;
+  gap: 35px;
+  align-items: center;
+}
+
+.about-content {
+  position: relative;
+  z-index: 2;
 }
 
 .about-content h2 {
-  font-size: 2.2rem;
-  line-height: 1.15;
-  margin-bottom: 16px;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  color: var(--navy);
+  margin: 6px 0 12px;
+}
+
+.about-heart-div {
+  display: block;
+  color: var(--red);
+  font-size: 1.05rem;
+  margin-bottom: 14px;
 }
 
 .about-content p {
-  color: var(--text-gray);
-  line-height: 1.8;
-  margin-bottom: 8px;
+  color: #2c425e;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  max-width: 440px;
+  margin-bottom: 24px;
 }
 
-.about-image {
+/* Girl Baker Placement & Blob */
+.about-image-wrap {
   display: flex;
   justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
-.about-image img {
-  height: 400px;
-  width: auto;
+.about-blob-bg {
+  position: absolute;
+  width: 90%;
+  max-width: 430px;
+  height: 85%;
+  background: #dbe7f7;
+  border-radius: 54% 46% 48% 52% / 58% 54% 46% 42%;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+.about-baker-img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
   object-fit: contain;
+  filter: drop-shadow(0 15px 25px rgba(19, 38, 63, 0.1));
 }
 
 /* ===== Menu Section ===== */
 .menu-section {
-  padding: 80px 0;
-  background: var(--light-blue);
-  position: relative;
+  padding: 35px 0 45px;
 }
 
-.section-header {
+.menu-card-outer {
+  background: var(--white);
+  border: 2px dashed var(--border-blue);
+  border-radius: 20px;
+  padding: 42px 28px;
   text-align: center;
-  margin-bottom: 30px;
+  position: relative;
+  box-shadow: var(--card-shadow);
 }
 
-.section-header .script-text {
-  display: block;
+/* Little red heart centered on top of dashed border */
+.menu-top-heart {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  padding: 0 8px;
+  color: var(--red);
+  font-size: 1rem;
+}
+
+.menu-inner-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu-doodle-left,
+.menu-doodle-right {
+  width: 70px;
+  height: 70px;
+  opacity: 0.85;
+  flex-shrink: 0;
+}
+
+.menu-center-text {
+  flex-grow: 1;
+}
+
+.menu-center-text h2 {
+  font-size: 2.1rem;
+  color: var(--navy);
   margin-bottom: 4px;
 }
 
-.section-header h2 {
-  font-size: 2.2rem;
+.menu-squiggle {
+  display: block;
+  margin: 6px auto 10px;
+  width: 60px;
+  height: 8px;
 }
 
-.menu-box {
-  background: var(--white);
-  border-radius: 24px;
-  padding: 60px 30px;
-  text-align: center;
-  border: 2px dashed var(--muted-blue);
-  box-shadow: var(--card-shadow);
-  position: relative;
-  overflow: hidden;
+.menu-center-text p {
+  color: #384e68;
+  font-size: 0.92rem;
 }
 
-.menu-box::before,
-.menu-box::after {
-  content: '';
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  background: url('bakery-doodles-blue-5886C4.png');
-  background-size: 400px;
-  opacity: 0.06;
-}
-
-.menu-box::before {
-  top: -20px;
-  left: -20px;
-}
-
-.menu-box::after {
-  bottom: -20px;
-  right: -20px;
-}
-
-.menu-box h2 {
-  font-size: 2rem;
-  margin-bottom: 12px;
-  position: relative;
-}
-
-.menu-box p {
-  color: var(--text-gray);
-  font-size: 0.95rem;
-  position: relative;
-}
-
-/* Decorative utensils around menu box */
-.menu-decor {
-  position: absolute;
-  opacity: 0.15;
-  color: var(--muted-blue);
-}
-
-.menu-decor.left {
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%) rotate(-15deg);
-  font-size: 4rem;
-}
-
-.menu-decor.right {
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%) rotate(15deg);
-  font-size: 4rem;
-}
-
-/* ===== Speciality Section ===== */
+/* ===== Our Speciality Section ===== */
 .speciality-section {
-  padding: 80px 0;
-  background: var(--white);
+  padding: 45px 0 50px;
+}
+
+.speciality-header {
+  text-align: center;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.speciality-header .script-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.speciality-ticks-left,
+.speciality-ticks-right {
+  color: var(--red);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.speciality-header h2 {
+  font-size: 2.4rem;
+  color: var(--navy);
+  margin-top: 4px;
 }
 
 .speciality-grid {
@@ -525,358 +582,379 @@ nav {
   gap: 16px;
 }
 
-.speciality-card {
+.product-card {
   background: var(--white);
-  border-radius: 20px;
-  overflow: hidden;
+  border-radius: 18px;
+  padding: 12px 12px 16px;
   box-shadow: var(--card-shadow);
-  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s, box-shadow 0.25s;
 }
 
-.speciality-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--card-shadow-hover);
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(19, 38, 63, 0.12);
 }
 
-.card-image {
+.product-img-box {
   width: 100%;
-  height: 160px;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
   overflow: hidden;
-  border-radius: 16px;
-  margin: 8px;
-  margin-bottom: 0;
-  width: calc(100% - 16px);
+  margin-bottom: 12px;
+  background: #f1f5fa;
 }
 
-.card-image img {
+.product-img-box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s;
+  transition: transform 0.35s ease;
 }
 
-.speciality-card:hover .card-image img {
+.product-card:hover .product-img-box img {
   transform: scale(1.05);
 }
 
-.card-content {
-  padding: 12px 14px 16px;
-}
-
-.card-content h3 {
-  font-size: 0.95rem;
-  margin-bottom: 4px;
+.product-card h3 {
+  font-size: 0.92rem;
   color: var(--navy);
+  margin-bottom: 5px;
+  font-weight: 600;
 }
 
-.card-content p {
-  font-size: 0.78rem;
-  color: var(--text-gray);
-  line-height: 1.5;
+.product-card p {
+  font-size: 0.72rem;
+  color: #556c85;
+  line-height: 1.45;
+  flex-grow: 1;
+  margin-bottom: 10px;
 }
 
-/* ===== CTA Section ===== */
-.cta-section {
-  padding: 60px 0;
-  background: var(--light-blue);
+.product-card-heart {
+  color: var(--red);
+  font-size: 0.75rem;
 }
 
-.cta-box {
-  background: var(--navy);
+/* ===== Custom Cake CTA Banner ===== */
+.cta-banner-section {
+  padding: 30px 0 50px;
+}
+
+.cta-banner {
+  background: var(--navy-banner);
+  border-radius: 22px;
+  padding: 30px 30px;
   color: var(--white);
-  padding: 50px 30px;
-  border-radius: 24px;
-  text-align: center;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 12px 35px rgba(19, 39, 66, 0.2);
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
 }
 
-.cta-box::before {
+/* Watermark doodle background inside the banner */
+.cta-banner::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('bakery-doodles-blue-5886C4.png');
-  background-repeat: repeat;
+  background: url('bakery-doodles-blue-5886C4.png') repeat;
   background-size: 600px;
-  opacity: 0.05;
+  opacity: 0.08;
   pointer-events: none;
 }
 
-.cta-box h2 {
-  font-size: 2rem;
-  margin-bottom: 12px;
+.cta-banner-baker {
+  display: none;
+}
+
+.cta-banner-content {
   position: relative;
   z-index: 2;
 }
 
-.cta-box p {
-  font-size: 0.95rem;
-  opacity: 0.85;
-  margin-bottom: 24px;
-  position: relative;
-  z-index: 2;
-}
-
-.cta-box .btn {
-  position: relative;
-  z-index: 2;
-}
-
-.btn-whatsapp-cta {
-  background: #25D366;
+.cta-banner-content h2 {
+  font-size: 1.9rem;
   color: var(--white);
+  margin-bottom: 8px;
 }
 
-.btn-whatsapp-cta:hover {
-  background: #1ebe57;
+.cta-banner-occasions {
+  font-size: 0.8rem;
+  color: #a4c2e6;
+  margin-bottom: 20px;
+  letter-spacing: 0.4px;
+}
+
+.btn-cta-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  color: var(--red);
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.6px;
+  transition: all 0.25s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-cta-wa:hover {
+  background: #fdf2f2;
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.btn-cta-wa i {
+  color: var(--red);
+  font-size: 0.95rem;
 }
 
 /* ===== Footer ===== */
 footer {
   background: var(--navy-dark);
   color: var(--white);
-  padding: 60px 0 0;
+  position: relative;
+  margin-top: 20px;
+}
+
+/* Scalloped top border */
+.footer-scallop {
+  width: 100%;
+  height: 24px;
+  display: block;
+  fill: var(--navy-dark);
+}
+
+.footer-main {
+  padding: 40px 0 35px;
 }
 
 .footer-grid {
   display: grid;
   gap: 30px;
-  padding-bottom: 40px;
 }
 
-.footer-brand .logo {
-  height: 60px;
-  margin-bottom: 12px;
+.footer-brand .footer-logo {
+  height: 52px;
+  width: auto;
   filter: brightness(0) invert(1);
+  margin-bottom: 14px;
 }
 
 .footer-brand p {
-  opacity: 0.7;
-  font-size: 0.85rem;
-  line-height: 1.6;
+  color: #8da4c0;
+  font-size: 0.82rem;
+  margin-bottom: 12px;
 }
 
-.footer-links h4,
-.footer-contact h4,
-.footer-social h4 {
-  font-family: 'Fredoka', sans-serif;
-  font-size: 1.1rem;
-  margin-bottom: 16px;
+.footer-brand-hearts {
+  color: var(--red);
+  font-size: 1rem;
+}
+
+.footer-col h4 {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
   color: var(--white);
+  margin-bottom: 16px;
 }
 
-.footer-links ul {
+.footer-links-list {
   list-style: none;
 }
 
-.footer-links ul li {
-  margin-bottom: 10px;
+.footer-links-list li {
+  margin-bottom: 9px;
 }
 
-.footer-links ul li a {
-  opacity: 0.7;
-  font-size: 0.9rem;
-  transition: opacity 0.3s, padding-left 0.3s;
+.footer-links-list a {
+  color: #8da4c0;
+  font-size: 0.82rem;
+  transition: color 0.2s;
 }
 
-.footer-links ul li a:hover {
-  opacity: 1;
-  padding-left: 5px;
+.footer-links-list a:hover {
+  color: var(--white);
 }
 
-.footer-contact .contact-item {
+.footer-contact-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 12px;
-  font-size: 0.9rem;
-  opacity: 0.7;
+  color: #8da4c0;
+  font-size: 0.82rem;
+  margin-bottom: 10px;
 }
 
-.footer-contact .contact-item i {
-  width: 18px;
+.footer-contact-item i {
+  width: 16px;
   text-align: center;
-  color: var(--accent-blue);
-  opacity: 1;
+  color: #a4c2e6;
 }
 
-.footer-social .social-links {
-  display: flex;
-  gap: 12px;
-}
-
-.footer-social .social-links a {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.1);
-  display: flex;
+.footer-social-box {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s, transform 0.3s;
+  color: var(--white);
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+  transition: all 0.25s;
 }
 
-.footer-social .social-links a:hover {
+.footer-social-box:hover {
   background: var(--red);
-  transform: translateY(-3px);
+  border-color: var(--red);
 }
 
-.footer-social p {
-  margin-top: 14px;
-  opacity: 0.6;
+.footer-follow-p {
+  color: #8da4c0;
   font-size: 0.8rem;
   line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.footer-follow-doodles {
+  color: var(--red);
+  font-size: 1rem;
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 18px 0;
   text-align: center;
-  font-size: 0.8rem;
-  opacity: 0.5;
+  font-size: 0.75rem;
+  color: #6d85a3;
 }
 
-/* ===== Floating WhatsApp ===== */
-.float-whatsapp {
+/* Floating WhatsApp */
+.floating-wa {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 56px;
-  height: 56px;
+  bottom: 22px;
+  right: 22px;
+  width: 52px;
+  height: 52px;
   background: #25D366;
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
-  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  font-size: 26px;
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45);
   z-index: 999;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.25s;
 }
 
-.float-whatsapp:hover {
+.floating-wa:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
 }
 
-/* ===== Responsive ===== */
+/* ===== Responsive Breakpoints ===== */
 @media (min-width: 768px) {
   .hero-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 20px;
   }
 
   .hero-content h1 {
-    font-size: 4.5rem;
+    font-size: 3.8rem;
   }
 
-  .hero-image img {
-    height: 550px;
-  }
-
-  .features-strip {
+  .features-card {
     grid-template-columns: repeat(5, 1fr);
-    padding: 28px 32px;
+    padding: 24px 16px;
+    gap: 0;
+  }
+
+  .feature-col:not(:last-child) {
+    border-right: 1px solid #edf3fc;
   }
 
   .about-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 30px;
   }
 
-  .about-image img {
-    height: 450px;
+  .about-content h2 {
+    font-size: 3rem;
   }
 
   .speciality-grid {
     grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
   }
 
-  .card-image {
-    height: 180px;
+  .cta-banner {
+    grid-template-columns: 140px 1fr 60px;
+    text-align: left;
+    padding: 24px 35px;
+  }
+
+  .cta-banner-baker {
+    display: block;
+    width: 120px;
+    height: auto;
+  }
+
+  .cta-banner-heart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--red);
+    font-size: 1.8rem;
   }
 
   .footer-grid {
-    grid-template-columns: 1.4fr 1fr 1.2fr 1fr;
-  }
-
-  .menu-btn {
-    display: none;
+    grid-template-columns: 1.3fr 1fr 1.3fr 1fr;
   }
 
   .nav-links {
     display: flex;
   }
 
-  .whatsapp-btn {
-    display: flex;
+  .btn-header-wa {
+    display: inline-flex;
   }
 
-  .features-section {
-    margin-top: -50px;
+  .menu-btn {
+    display: none;
   }
 }
 
 @media (min-width: 1024px) {
   .hero-content h1 {
-    font-size: 5.2rem;
-  }
-
-  .hero-image img {
-    height: 600px;
+    font-size: 4.4rem;
   }
 }
 
 @media (max-width: 767px) {
-  .speciality-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .speciality-card:nth-child(5) {
+  .product-card:nth-child(5) {
     grid-column: 1 / -1;
-    max-width: 50%;
+    max-width: 60%;
     margin: 0 auto;
   }
 
-  .about-content h2 {
-    font-size: 1.8rem;
+  .menu-doodle-left,
+  .menu-doodle-right {
+    display: none;
   }
-
-  .about-image img {
-    height: 300px;
-  }
-
-  .cta-box h2 {
-    font-size: 1.6rem;
-  }
-}
-
-/* ===== Animations ===== */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.animate-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 </style>
 </head>
@@ -886,27 +964,29 @@ footer {
 <header id="header">
   <div class="container">
     <nav>
-      <img src="logo.png" class="logo" alt="Bread & Beyond - ESTD 2026">
+      <a href="#home">
+        <img src="logo.png" class="logo" alt="Bread & Beyond - ESTD 2026">
+      </a>
       <ul class="nav-links">
-        <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#menu">Menu</a></li>
-        <li><a href="#speciality">Our Speciality</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#home" class="active">HOME</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#menu">MENU</a></li>
+        <li><a href="#speciality">OUR SPECIALITY</a></li>
+        <li><a href="#contact">CONTACT</a></li>
       </ul>
-      <a class="whatsapp-btn" href="https://wa.me/917842177972" target="_blank">
+      <a class="btn-header-wa" href="https://wa.me/917842177972" target="_blank">
         <i class="fab fa-whatsapp"></i> ORDER ON WHATSAPP
       </a>
-      <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
     </nav>
     <div id="mobileMenu" class="mobile-menu">
-      <a href="#home" onclick="toggleMenu()">Home</a>
-      <a href="#about" onclick="toggleMenu()">About</a>
-      <a href="#menu" onclick="toggleMenu()">Menu</a>
-      <a href="#speciality" onclick="toggleMenu()">Our Speciality</a>
-      <a href="#contact" onclick="toggleMenu()">Contact</a>
-      <a class="mobile-whatsapp" href="https://wa.me/917842177972" target="_blank">
-        <i class="fab fa-whatsapp"></i> Order on WhatsApp
+      <a href="#home" onclick="toggleMenu()">HOME</a>
+      <a href="#about" onclick="toggleMenu()">ABOUT</a>
+      <a href="#menu" onclick="toggleMenu()">MENU</a>
+      <a href="#speciality" onclick="toggleMenu()">OUR SPECIALITY</a>
+      <a href="#contact" onclick="toggleMenu()">CONTACT</a>
+      <a class="mobile-wa-btn" href="https://wa.me/917842177972" target="_blank">
+        <i class="fab fa-whatsapp"></i> ORDER ON WHATSAPP
       </a>
     </div>
   </div>
@@ -916,27 +996,28 @@ footer {
 <section class="hero" id="home">
   <div class="container hero-grid">
     <div class="hero-content">
+      <div class="red-accents-top">\ /</div>
       <h1>
         Freshly Baked.<br>
-        Thought<span style="font-family:'Dancing Script',cursive;font-weight:700">f</span>ully<br>
-        Crafted.
+        Thoughtfully<br>
+        Crafted.<span class="hero-heart-blue">♡</span>
       </h1>
-      <div class="hero-divider"></div>
-      <span class="heart-icon">❤️</span>
-      <p class="hero-desc">
-        Delicious breads, cakes and more – made fresh<br>
-        every day with the finest ingredients and a whole<br>
-        lot of love.
-      </p>
-      <div class="actions">
-        <a class="btn btn-primary" href="https://wa.me/917842177972" target="_blank">
-          <i class="fab fa-whatsapp"></i>&nbsp; ORDER ON WHATSAPP
+      <span class="hero-divider-heart">❤️</span>
+      <div class="hero-desc-wrap">
+        <p class="hero-desc">
+          Delicious breads, cakes and more – made fresh every day with the finest ingredients and a whole lot of love.
+        </p>
+        <span class="hero-heart-outline">♡</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn-red" href="https://wa.me/917842177972" target="_blank">
+          <i class="fab fa-whatsapp"></i> ORDER ON WHATSAPP
         </a>
-        <a class="btn btn-outline" href="#menu">VIEW MENU</a>
+        <a class="btn-outline-navy" href="#menu">VIEW MENU</a>
       </div>
     </div>
-    <div class="hero-image">
-      <img src="baker-running.png" alt="Baker with baguettes illustration">
+    <div class="hero-image-wrap">
+      <img src="baker-running.png" class="hero-baker-img" alt="Baker running with croissant illustration">
     </div>
   </div>
 </section>
@@ -944,72 +1025,72 @@ footer {
 <!-- ===== Features Strip ===== -->
 <div class="features-section">
   <div class="container">
-    <div class="features-strip animate-on-scroll">
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="32" r="28" stroke="#13263F" stroke-width="2" fill="#FDF8F0"/>
-            <path d="M22 38c0-8 4-14 10-14s10 6 10 14" stroke="#13263F" stroke-width="2" fill="#E8D5B7"/>
-            <path d="M20 38h24v4a4 4 0 01-4 4H24a4 4 0 01-4-4v-4z" fill="#13263F" opacity="0.1"/>
-            <line x1="27" y1="30" x2="27" y2="36" stroke="#13263F" stroke-width="1.5"/>
-            <line x1="32" y1="28" x2="32" y2="36" stroke="#13263F" stroke-width="1.5"/>
-            <line x1="37" y1="30" x2="37" y2="36" stroke="#13263F" stroke-width="1.5"/>
-            <path d="M28 22c0-2 1.5-3 4-3s4 1 4 3" stroke="#C53030" stroke-width="1.5" fill="none"/>
+    <div class="features-card">
+      <span class="features-tick-left">\ /</span>
+      <span class="features-tick-right">\ /</span>
+
+      <!-- 1. Bread -->
+      <div class="feature-col">
+        <div class="feature-icon-svg">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 28C10 24 10 18 16 14C22 10 32 10 36 14C41 18 41 24 38 28C36 31 32 32 25 32C18 32 14 31 12 28Z" stroke="#2F5B99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 17L16 23" stroke="#2F5B99" stroke-width="2" stroke-linecap="round"/>
+            <path d="M25 15L24 23" stroke="#2F5B99" stroke-width="2" stroke-linecap="round"/>
+            <path d="M32 17L31 23" stroke="#2F5B99" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
         <span>FRESHLY<br>BAKED DAILY</span>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="32" r="28" stroke="#13263F" stroke-width="2" fill="#FDF8F0"/>
-            <ellipse cx="32" cy="38" rx="14" ry="8" stroke="#13263F" stroke-width="2" fill="#E8D5B7"/>
-            <path d="M24 34c2-4 6-6 8-6s6 2 8 6" stroke="#13263F" stroke-width="1.5" fill="none"/>
-            <circle cx="28" cy="36" r="1.5" fill="#C53030"/>
-            <circle cx="34" cy="34" r="1.5" fill="#C53030"/>
-            <circle cx="36" cy="38" r="1" fill="#C53030"/>
-            <path d="M26 20l2 6M38 20l-2 6M32 18v6" stroke="#13263F" stroke-width="1.5"/>
+
+      <!-- 2. Ingredients -->
+      <div class="feature-col">
+        <div class="feature-icon-svg">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 24C14 30 18 34 24 34C30 34 34 30 34 24H14Z" stroke="#2F5B99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M24 14V24" stroke="#2F5B99" stroke-width="2" stroke-linecap="round"/>
+            <path d="M19 18C20.5 15.5 22.5 14 24 14C25.5 14 27.5 15.5 29 18" stroke="#2F5B99" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="21" cy="21" r="1.5" fill="#2F5B99"/>
+            <circle cx="27" cy="21" r="1.5" fill="#2F5B99"/>
+            <circle cx="24" cy="19" r="1.5" fill="#2F5B99"/>
           </svg>
         </div>
         <span>PREMIUM<br>INGREDIENTS</span>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="32" r="28" stroke="#13263F" stroke-width="2" fill="#FDF8F0"/>
-            <path d="M20 42h24v4H20z" fill="#E8D5B7" stroke="#13263F" stroke-width="1.5"/>
-            <path d="M22 36h20c1 0 2 1 2 2v4H20v-4c0-1 1-2 2-2z" fill="#FFF5E6" stroke="#13263F" stroke-width="1.5"/>
-            <path d="M24 36c0-3 2-6 4-8 1.5 1.5 2 3 2.5 5 .5-2 1-3.5 2.5-5 2 2 4 5 4 8" stroke="#C53030" stroke-width="1.5" fill="none"/>
-            <circle cx="32" cy="24" r="3" stroke="#13263F" stroke-width="1.5" fill="#FDF8F0"/>
-            <path d="M30 22c1-1.5 3-1.5 4 0" stroke="#C53030" stroke-width="1"/>
+
+      <!-- 3. Custom Cakes -->
+      <div class="feature-col">
+        <div class="feature-icon-svg">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 32H34V26L24 17L14 26V32Z" stroke="#2F5B99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 26H34" stroke="#2F5B99" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="24" cy="14" r="2.5" stroke="#2F5B99" stroke-width="2"/>
+            <path d="M24 11.5C24.5 9 26 8 28 8" stroke="#2F5B99" stroke-width="1.8" stroke-linecap="round"/>
           </svg>
         </div>
         <span>CUSTOM<br>CELEBRATION CAKES</span>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="32" r="28" stroke="#13263F" stroke-width="2" fill="#FDF8F0"/>
-            <rect x="22" y="28" width="20" height="14" rx="3" stroke="#13263F" stroke-width="2" fill="#E8D5B7"/>
-            <path d="M28 28v-4a4 4 0 018 0v4" stroke="#13263F" stroke-width="2" fill="none"/>
-            <circle cx="32" cy="35" r="2" fill="#13263F"/>
-            <rect x="31" y="35" width="2" height="4" rx="1" fill="#13263F"/>
-            <path d="M18 46l4-4M46 46l-4-4" stroke="#C53030" stroke-width="1.5"/>
-            <circle cx="20" cy="24" r="2" stroke="#13263F" stroke-width="1"/>
-            <circle cx="44" cy="24" r="2" stroke="#13263F" stroke-width="1"/>
+
+      <!-- 4. Local Delivery -->
+      <div class="feature-col">
+        <div class="feature-icon-svg">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="32" r="3.5" stroke="#2F5B99" stroke-width="2"/>
+            <circle cx="33" cy="32" r="3.5" stroke="#2F5B99" stroke-width="2"/>
+            <path d="M19.5 32H29.5" stroke="#2F5B99" stroke-width="2"/>
+            <path d="M16 28.5L20 22H27L30 32" stroke="#2F5B99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M30 22H33L35 28.5" stroke="#2F5B99" stroke-width="2" stroke-linecap="round"/>
+            <path d="M14 22H18V18H14V22Z" stroke="#2F5B99" stroke-width="1.8" stroke-linejoin="round"/>
           </svg>
         </div>
         <span>LOCAL DELIVERY<br>AVAILABLE</span>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="32" r="28" stroke="#13263F" stroke-width="2" fill="#FDF8F0"/>
-            <path d="M24 40c0-6 3-10 8-10s8 4 8 10" stroke="#13263F" stroke-width="2" fill="#E8D5B7"/>
-            <path d="M22 40h20v2a3 3 0 01-3 3H25a3 3 0 01-3-3v-2z" fill="#FFF5E6" stroke="#13263F" stroke-width="1.5"/>
-            <path d="M30 34c0-1 .5-2 2-2s2 1 2 2" stroke="#C53030" stroke-width="1.5"/>
-            <path d="M26 22c2-2 4-3 6-3s4 1 6 3" stroke="#C53030" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
-            <circle cx="32" cy="17" r="2" fill="#C53030" opacity="0.6"/>
+
+      <!-- 5. Handmade Small Batches -->
+      <div class="feature-col">
+        <div class="feature-icon-svg">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 33H32V30H16V33Z" stroke="#2F5B99" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M16 30C13 30 13 25 15 23C14 20 16 16 20 16C22 14 26 14 28 16C32 16 34 20 33 23C35 25 35 30 32 30" stroke="#2F5B99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <span>HANDMADE IN<br>SMALL BATCHES</span>
@@ -1018,24 +1099,21 @@ footer {
   </div>
 </div>
 
-<!-- ===== About Section ===== -->
+<!-- ===== About Us Section ===== -->
 <section class="about-section" id="about">
   <div class="container about-grid">
-    <div class="about-content animate-on-scroll">
-      <span class="script-text">About Us &nbsp;❤️</span>
+    <div class="about-content">
+      <span class="script-tag">About Us ♡</span>
       <h2>Made With<br>Butter & Love</h2>
+      <span class="about-heart-div">❤️</span>
       <p>
-        Bread & Beyond is a small-batch bakery built on
-        passion, quality and creativity. Every creation is
-        crafted with care to bring you the perfect blend
-        of taste and happiness.
+        Bread & Beyond is a small-batch bakery built on passion, quality and creativity. Every creation is crafted with care to bring you the perfect blend of taste and happiness.
       </p>
-      <div class="actions">
-        <a class="btn btn-primary" href="#speciality">LEARN MORE</a>
-      </div>
+      <a class="btn-red" href="#speciality">LEARN MORE</a>
     </div>
-    <div class="about-image animate-on-scroll">
-      <img src="baker-croissant.png" alt="Baker riding a croissant illustration">
+    <div class="about-image-wrap">
+      <div class="about-blob-bg"></div>
+      <img src="baker-croissant.png" class="about-baker-img" alt="Baker girl sitting on croissant illustration">
     </div>
   </div>
 </section>
@@ -1043,98 +1121,144 @@ footer {
 <!-- ===== Menu Section ===== -->
 <section class="menu-section" id="menu">
   <div class="container">
-    <div class="menu-box animate-on-scroll">
-      <span class="menu-decor left">🍴</span>
-      <span class="menu-decor right">🥄</span>
-      <div class="section-header">
-        <h2>Our Menu</h2>
+    <div class="menu-card-outer">
+      <span class="menu-top-heart">❤️</span>
+      <div class="menu-inner-wrap">
+        <!-- Cloche Platter Doodle Left -->
+        <svg class="menu-doodle-left" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 52H58" stroke="#4878B5" stroke-width="2" stroke-linecap="round"/>
+          <path d="M25 52C25 38 31 34 40 34C49 34 55 38 55 52" stroke="#4878B5" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="40" cy="31" r="3" stroke="#4878B5" stroke-width="2"/>
+          <path d="M18 42L15 40M19 36L16 33M24 30L22 26" stroke="#4878B5" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M20 48C19 46.5 19 45 20.5 45C22 45 22 46.5 20 48Z" stroke="#4878B5" stroke-width="1.2"/>
+        </svg>
+
+        <div class="menu-center-text">
+          <h2>Our Menu</h2>
+          <!-- Squiggle underline -->
+          <svg class="menu-squiggle" viewBox="0 0 60 8" fill="none">
+            <path d="M2 4C6 1 10 7 14 4C18 1 22 7 26 4C30 1 34 7 38 4C42 1 46 7 50 4C54 1 58 7 59 4" stroke="#A82828" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <p>Our latest menu will be available here soon.</p>
+        </div>
+
+        <!-- Whisk & Bowl Doodle Right -->
+        <svg class="menu-doodle-right" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 48C26 56 32 60 40 60C48 60 54 56 54 48H26Z" stroke="#4878B5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M48 46L58 26" stroke="#4878B5" stroke-width="2" stroke-linecap="round"/>
+          <path d="M44 48C45 42 49 35 53 32" stroke="#4878B5" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M51 50C54 45 56 38 58 35" stroke="#4878B5" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="32" cy="40" r="1.5" fill="#4878B5"/>
+          <circle cx="36" cy="36" r="1.5" fill="#4878B5"/>
+        </svg>
       </div>
-      <p>Our latest menu will be available here soon.</p>
     </div>
   </div>
 </section>
 
-<!-- ===== Speciality Section ===== -->
+<!-- ===== Our Speciality Section ===== -->
 <section class="speciality-section" id="speciality">
   <div class="container">
-    <div class="section-header animate-on-scroll">
-      <span class="script-text">Our Speciality &nbsp;❤️</span>
+    <div class="speciality-header">
+      <div class="script-tag">
+        <span class="speciality-ticks-left">\ /</span>
+        Our Speciality ♡
+        <span class="speciality-ticks-right">\ /</span>
+      </div>
       <h2>Crafted to Perfection</h2>
     </div>
+
     <div class="speciality-grid">
-      <div class="speciality-card animate-on-scroll">
-        <div class="card-image">
-          <img src="images/milk-bread.jpg" alt="Milk Bread" onerror="this.parentElement.style.background='linear-gradient(135deg, #FFF5E6, #F0E0C0)';this.style.display='none';">
+      <!-- 1. Milk Bread -->
+      <div class="product-card">
+        <div class="product-img-box">
+          <img src="images/milk-bread.jpg" alt="Milk Bread">
         </div>
-        <div class="card-content">
-          <h3>Milk Bread</h3>
-          <p>Soft, fluffy and perfect for every meal.</p>
-        </div>
+        <h3>Milk Bread</h3>
+        <p>Soft, fluffy and perfect for every meal.</p>
+        <span class="product-card-heart">❤️</span>
       </div>
-      <div class="speciality-card animate-on-scroll">
-        <div class="card-image">
-          <img src="images/chocolate-cake-tub.jpg" alt="Chocolate Cake Tub" onerror="this.parentElement.style.background='linear-gradient(135deg, #8B6914, #5C3D0A)';this.style.display='none';">
+
+      <!-- 2. Chocolate Cake Tub -->
+      <div class="product-card">
+        <div class="product-img-box">
+          <img src="images/chocolate-cake-tub.jpg" alt="Chocolate Cake Tub">
         </div>
-        <div class="card-content">
-          <h3>Chocolate Cake Tub</h3>
-          <p>Layers of rich chocolate and creamy delight.</p>
-        </div>
+        <h3>Chocolate Cake Tub</h3>
+        <p>Layers of rich chocolate and creamy delight.</p>
+        <span class="product-card-heart">❤️</span>
       </div>
-      <div class="speciality-card animate-on-scroll">
-        <div class="card-image">
-          <img src="images/mango-cake-tub.jpg" alt="Mango Cake Tub" onerror="this.parentElement.style.background='linear-gradient(135deg, #FFD700, #FF8C00)';this.style.display='none';">
+
+      <!-- 3. Mango Cake Tub -->
+      <div class="product-card">
+        <div class="product-img-box">
+          <img src="images/mango-cake-tub.jpg" alt="Mango Cake Tub">
         </div>
-        <div class="card-content">
-          <h3>Mango Cake Tub</h3>
-          <p>Mango goodness in every spoonful.</p>
-        </div>
+        <h3>Mango Cake Tub</h3>
+        <p>Mango goodness in every spoonful.</p>
+        <span class="product-card-heart">❤️</span>
       </div>
-      <div class="speciality-card animate-on-scroll">
-        <div class="card-image">
-          <img src="images/tres-leches.jpg" alt="Tres Leches" onerror="this.parentElement.style.background='linear-gradient(135deg, #FFF8F0, #F5E6D0)';this.style.display='none';">
+
+      <!-- 4. Tres Leches -->
+      <div class="product-card">
+        <div class="product-img-box">
+          <img src="images/tres-leches.jpg" alt="Tres Leches">
         </div>
-        <div class="card-content">
-          <h3>Tres Leches</h3>
-          <p>Classic, moist and delightfully sweet.</p>
-        </div>
+        <h3>Tres Leches</h3>
+        <p>Classic, moist and delightfully sweet.</p>
+        <span class="product-card-heart">❤️</span>
       </div>
-      <div class="speciality-card animate-on-scroll">
-        <div class="card-image">
-          <img src="images/baked-mac-cheese.jpg" alt="Baked Mac & Cheese" onerror="this.parentElement.style.background='linear-gradient(135deg, #FFD700, #E8A317)';this.style.display='none';">
+
+      <!-- 5. Baked Mac & Cheese -->
+      <div class="product-card">
+        <div class="product-img-box">
+          <img src="images/baked-mac-cheese.jpg" alt="Baked Mac & Cheese">
         </div>
-        <div class="card-content">
-          <h3>Baked Mac & Cheese</h3>
-          <p>Cheesy, creamy and baked to perfection.</p>
-        </div>
+        <h3>Baked Mac & Cheese</h3>
+        <p>Cheesy, creamy and baked to perfection.</p>
+        <span class="product-card-heart">❤️</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== CTA Section ===== -->
-<section class="cta-section">
+<!-- ===== Custom Cake CTA Banner ===== -->
+<div class="cta-banner-section">
   <div class="container">
-    <div class="cta-box animate-on-scroll">
-      <h2>Need a Custom Cake?</h2>
-      <p>Birthdays &nbsp;•&nbsp; Weddings &nbsp;•&nbsp; Anniversaries &nbsp;•&nbsp; Corporate Events</p>
-      <a class="btn btn-whatsapp-cta" href="https://wa.me/917842177972" target="_blank">
-        <i class="fab fa-whatsapp"></i>&nbsp; LET'S DISCUSS ON WHATSAPP
-      </a>
+    <div class="cta-banner">
+      <img src="baker-running.png" class="cta-banner-baker" alt="Baker banner illustration">
+      <div class="cta-banner-content">
+        <h2>Need a Custom Cake?</h2>
+        <div class="cta-banner-occasions">Birthdays &nbsp;•&nbsp; Weddings &nbsp;•&nbsp; Anniversaries &nbsp;•&nbsp; Corporate Events</div>
+        <a class="btn-cta-wa" href="https://wa.me/917842177972" target="_blank">
+          <i class="fab fa-whatsapp"></i> LET'S DISCUSS ON WHATSAPP
+        </a>
+      </div>
+      <div class="cta-banner-heart">❤️</div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- ===== Footer ===== -->
 <footer id="contact">
-  <div class="container">
-    <div class="footer-grid">
+  <!-- Scalloped SVG Awning Top -->
+  <svg class="footer-scallop" viewBox="0 0 1200 24" preserveAspectRatio="none">
+    <path d="M0,24 C25,0 35,0 60,24 C85,0 95,0 120,24 C145,0 155,0 180,24 C205,0 215,0 240,24 C265,0 275,0 300,24 C325,0 335,0 360,24 C385,0 395,0 420,24 C445,0 455,0 480,24 C505,0 515,0 540,24 C565,0 575,0 600,24 C625,0 635,0 660,24 C685,0 695,0 720,24 C745,0 755,0 780,24 C805,0 815,0 840,24 C865,0 875,0 900,24 C925,0 935,0 960,24 C985,0 995,0 1020,24 C1045,0 1055,0 1080,24 C1105,0 1115,0 1140,24 C1165,0 1175,0 1200,24 L1200,24 L0,24 Z"/>
+  </svg>
+
+  <div class="footer-main">
+    <div class="container footer-grid">
+      <!-- Brand -->
       <div class="footer-brand">
-        <img src="logo.png" class="logo" alt="Bread & Beyond">
+        <img src="logo.png" class="footer-logo" alt="Bread & Beyond">
         <p>Freshly baked. Thoughtfully crafted.</p>
+        <span class="footer-brand-hearts">♡ &nbsp; 🥖</span>
       </div>
-      <div class="footer-links">
+
+      <!-- Quick Links -->
+      <div class="footer-col">
         <h4>QUICK LINKS</h4>
-        <ul>
+        <ul class="footer-links-list">
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About Us</a></li>
           <li><a href="#menu">Menu</a></li>
@@ -1142,74 +1266,67 @@ footer {
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
-      <div class="footer-contact">
+
+      <!-- Contact Us -->
+      <div class="footer-col">
         <h4>CONTACT US</h4>
-        <div class="contact-item">
+        <div class="footer-contact-item">
           <i class="fas fa-phone"></i>
           <span>+91 78421 77972</span>
         </div>
-        <div class="contact-item">
+        <div class="footer-contact-item">
           <i class="fab fa-instagram"></i>
           <span>@breadandbeyond.in</span>
         </div>
-        <div class="contact-item">
+        <div class="footer-contact-item">
           <i class="fas fa-globe"></i>
           <span>breadandbeyond.in</span>
         </div>
-        <div class="contact-item">
+        <div class="footer-contact-item">
           <i class="fas fa-envelope"></i>
           <span>hello@breadandbeyond.in</span>
         </div>
       </div>
-      <div class="footer-social">
+
+      <!-- Follow Us -->
+      <div class="footer-col">
         <h4>FOLLOW US</h4>
-        <div class="social-links">
-          <a href="https://instagram.com/breadandbeyond.in" target="_blank" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://wa.me/917842177972" target="_blank" aria-label="WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-          </a>
-        </div>
-        <p>Stay updated with our latest bakes and offers!</p>
+        <a class="footer-social-box" href="https://instagram.com/breadandbeyond.in" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <p class="footer-follow-p">Stay updated with our latest bakes and offers!</p>
+        <span class="footer-follow-doodles">♡ &nbsp; 🍞</span>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 Bread & Beyond. All Rights Reserved. 🍞</p>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p>© 2026 Bread & Beyond. All Rights Reserved. ♡</p>
     </div>
   </div>
 </footer>
 
-<!-- Floating WhatsApp -->
-<a class="float-whatsapp" href="https://wa.me/917842177972" target="_blank" aria-label="Chat on WhatsApp">
+<!-- Floating WhatsApp Button -->
+<a class="floating-wa" href="https://wa.me/917842177972" target="_blank" aria-label="WhatsApp Us">
   <i class="fab fa-whatsapp"></i>
 </a>
 
 <script>
 // Toggle mobile menu
 function toggleMenu() {
-  const menu = document.getElementById('mobileMenu');
-  menu.classList.toggle('active');
+  const m = document.getElementById('mobileMenu');
+  m.classList.toggle('active');
 }
 
-// Header scroll effect
-window.addEventListener('scroll', () => {
-  const header = document.getElementById('header');
-  if (window.scrollY > 50) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-});
-
-// Active nav link highlighting
-const sections = document.querySelectorAll('section[id], .hero[id]');
+// Active navigation highlight on scroll
+const sections = document.querySelectorAll('section[id], header[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
 
 window.addEventListener('scroll', () => {
   let current = '';
   sections.forEach(section => {
-    const sectionTop = section.offsetTop - 100;
+    const sectionTop = section.offsetTop - 120;
     if (window.scrollY >= sectionTop) {
       current = section.getAttribute('id');
     }
@@ -1221,33 +1338,6 @@ window.addEventListener('scroll', () => {
       link.classList.add('active');
     }
   });
-});
-
-// Scroll animation observer
-const observerOptions = {
-  threshold: 0.15,
-  rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, observerOptions);
-
-document.querySelectorAll('.animate-on-scroll').forEach(el => {
-  observer.observe(el);
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-  const menu = document.getElementById('mobileMenu');
-  const menuBtn = document.querySelector('.menu-btn');
-  if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
-    menu.classList.remove('active');
-  }
 });
 </script>
 
