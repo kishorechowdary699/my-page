@@ -39,14 +39,12 @@ body {
   font-family: 'Poppins', sans-serif;
   color: var(--navy);
   overflow-x: hidden;
-  /* Darker, clearly visible doodle background matching reference */
-  background-color: #dbe7f6;
-  background-image: 
-    linear-gradient(rgba(235, 243, 253, 0.45), rgba(235, 243, 253, 0.45)),
-    url('bakery-doodles-blue-5886C4.png');
-  background-repeat: repeat;
-  background-size: 1100px;
-  background-attachment: scroll;
+  /* Clean, sparse bakery doodles background with 20-25 scattered elements */
+  background-color: #eaf1fa;
+  background-image: url('bakery-doodles-sparse.svg');
+  background-repeat: repeat-y;
+  background-position: top center;
+  background-size: 1400px auto;
 }
 
 img {
@@ -211,7 +209,7 @@ nav {
 /* ===== Sections General ===== */
 section {
   position: relative;
-  background: transparent; /* Allows doodles to show through */
+  background: transparent;
 }
 
 /* ===== Hero Section ===== */
@@ -369,7 +367,6 @@ section {
   gap: 20px;
 }
 
-/* Decorative red ticks on the features box */
 .features-tick-left {
   position: absolute;
   top: 14px;
@@ -496,7 +493,6 @@ section {
   box-shadow: var(--card-shadow);
 }
 
-/* Little red heart centered on top of dashed border */
 .menu-top-heart {
   position: absolute;
   top: -12px;
@@ -658,20 +654,6 @@ section {
   gap: 20px;
 }
 
-/* Watermark doodle background inside the banner */
-.cta-banner::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('bakery-doodles-blue-5886C4.png') repeat;
-  background-size: 600px;
-  opacity: 0.08;
-  pointer-events: none;
-}
-
 .cta-banner-baker {
   display: none;
 }
@@ -728,7 +710,6 @@ footer {
   margin-top: 20px;
 }
 
-/* Scalloped top border */
 .footer-scallop {
   width: 100%;
   height: 24px;
@@ -941,6 +922,18 @@ footer {
 @media (min-width: 1024px) {
   .hero-content h1 {
     font-size: 4.4rem;
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    background-size: 1100px auto;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    background-size: 800px auto;
   }
 }
 

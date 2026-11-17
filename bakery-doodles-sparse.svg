@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 2200" width="100%" height="100%">
+  <defs>
+    <style>
+      .bd { fill: none; stroke: #6b95cf; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+      .bd-light { fill: none; stroke: #8baee2; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+      .rd { fill: none; stroke: #A82828; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <!-- 1. Hero: Croissant (top center) -->
+  <g transform="translate(730, 45) rotate(-12) scale(1.15)" class="bd">
+    <path d="M10,35 C5,24 15,10 35,8 C55,6 75,15 85,30 C75,25 55,22 35,24 C20,26 12,32 10,35 Z"/>
+    <path d="M28,25 C32,15 48,12 60,18 C55,23 45,24 35,25"/>
+    <path d="M48,22 C55,16 68,16 75,22"/>
+  </g>
+
+  <!-- 2. Hero: Wire Whisk (top right) -->
+  <g transform="translate(1260, 65) rotate(40) scale(1.15)" class="bd">
+    <path d="M15,50 L15,82" stroke-width="2.5"/>
+    <path d="M15,48 C5,35 5,15 15,5 C25,15 25,35 15,48 Z"/>
+    <path d="M15,48 C10,35 10,15 15,5 C20,15 20,35 15,48 Z"/>
+    <line x1="15" y1="5" x2="15" y2="48"/>
+  </g>
+
+  <!-- 3. Hero: Rolling Pin (upper right) -->
+  <g transform="translate(1310, 135) rotate(-25) scale(1.05)" class="bd">
+    <rect x="25" y="12" width="75" height="22" rx="4"/>
+    <line x1="10" y1="23" x2="25" y2="23" stroke-width="3"/>
+    <line x1="100" y1="23" x2="115" y2="23" stroke-width="3"/>
+  </g>
+
+  <!-- 4. Hero: Heart Outline (mid-upper right) -->
+  <g transform="translate(1240, 185) rotate(15) scale(0.95)" class="bd-light">
+    <path d="M20,10 C15,0 0,2 0,16 C0,26 14,34 20,40 C26,34 40,26 40,16 C40,2 25,0 20,10 Z"/>
+  </g>
+
+  <!-- 5. Hero: Pretzel / Loaf (mid right) -->
+  <g transform="translate(1280, 240) rotate(12) scale(1.05)" class="bd">
+    <path d="M15,30 C5,18 18,5 30,15 C36,20 40,30 45,30 C50,30 54,20 60,15 C72,5 85,18 75,30 C65,40 55,42 45,32 C35,42 25,40 15,30 Z"/>
+  </g>
+
+  <!-- 6. Hero: Whisk 2 (lower right of hero) -->
+  <g transform="translate(1170, 290) rotate(70) scale(1.05)" class="bd">
+    <path d="M15,50 L15,80" stroke-width="2.5"/>
+    <path d="M15,48 C5,35 5,15 15,5 C25,15 25,35 15,48 Z"/>
+    <line x1="15" y1="5" x2="15" y2="48"/>
+  </g>
+
+  <!-- 7. Hero: Dough Scraper / Bread (bottom left) -->
+  <g transform="translate(25, 310) rotate(-15) scale(1.05)" class="bd">
+    <rect x="10" y="10" width="65" height="45" rx="8"/>
+    <line x1="10" y1="24" x2="75" y2="24" stroke-dasharray="4 3"/>
+  </g>
+
+  <!-- 8. Hero: Little Star / Sparkle (center-ish) -->
+  <g transform="translate(980, 290) scale(0.75)">
+    <path d="M15,0 L18,12 L30,15 L18,18 L15,30 L12,18 L0,15 L12,12 Z" fill="#6b95cf" opacity="0.6"/>
+  </g>
+
+  <!-- 9. About: Heart Outline (top right of croissant girl) -->
+  <g transform="translate(1080, 480) rotate(-10) scale(0.9)" class="bd-light">
+    <path d="M20,10 C15,0 0,2 0,16 C0,26 14,34 20,40 C26,34 40,26 40,16 C40,2 25,0 20,10 Z"/>
+  </g>
+
+  <!-- 10. About: Wheat Stalk (top right) -->
+  <g transform="translate(1220, 475) rotate(15) scale(1.15)" class="bd">
+    <path d="M15,90 Q20,45 25,5"/>
+    <path d="M25,5 C20,12 14,18 20,22 C23,18 25,12 25,5 Z"/>
+    <path d="M24,18 C28,24 35,26 31,32 C26,30 25,24 24,18 Z"/>
+    <path d="M22,30 C16,36 10,40 16,46 C20,42 22,36 22,30 Z"/>
+    <path d="M21,42 C26,48 33,50 28,56 C24,53 22,48 21,42 Z"/>
+    <path d="M19,54 C13,60 8,64 13,70 C17,66 19,60 19,54 Z"/>
+  </g>
+
+  <!-- 11. About: Whisk (mid right) -->
+  <g transform="translate(1240, 580) rotate(45) scale(1.0)" class="bd">
+    <path d="M15,45 L15,75" stroke-width="2.5"/>
+    <path d="M15,44 C6,32 6,14 15,5 C24,14 24,32 15,44 Z"/>
+    <line x1="15" y1="5" x2="15" y2="44"/>
+  </g>
+
+  <!-- 12. About: Bread Slice (bottom right) -->
+  <g transform="translate(1230, 675) scale(1.0)" class="bd">
+    <path d="M15,12 C10,5 30,5 35,12 C45,15 42,40 38,42 C30,44 18,44 12,42 C8,40 5,15 15,12 Z"/>
+    <path d="M12,14 C16,10 28,10 32,14"/>
+  </g>
+
+  <!-- 13. About: Red Heart Outline (left of croissant) -->
+  <g transform="translate(680, 545) rotate(-15) scale(0.95)" class="rd">
+    <path d="M20,10 C15,0 0,2 0,16 C0,26 14,34 20,40 C26,34 40,26 40,16 C40,2 25,0 20,10 Z"/>
+  </g>
+
+  <!-- 14. Speciality / Background: Cupcake (far left side) -->
+  <g transform="translate(30, 800) rotate(15) scale(1.0)" class="bd">
+    <path d="M15,30 L45,30 L40,55 L20,55 Z"/>
+    <path d="M12,30 C8,22 18,15 25,18 C28,12 40,12 44,20 C50,22 48,30 45,30"/>
+    <circle cx="30" cy="10" r="3.5" fill="#6b95cf"/>
+  </g>
+
+  <!-- 15. Speciality: Rolling Pin (far right side) -->
+  <g transform="translate(1310, 820) rotate(65) scale(1.0)" class="bd">
+    <rect x="20" y="10" width="65" height="18" rx="3"/>
+    <line x1="8" y1="19" x2="20" y2="19" stroke-width="2.5"/>
+    <line x1="85" y1="19" x2="97" y2="19" stroke-width="2.5"/>
+  </g>
+
+  <!-- 16. Speciality: Small Heart (left side) -->
+  <g transform="translate(45, 960) scale(0.85)" class="bd-light">
+    <path d="M20,10 C15,0 0,2 0,16 C0,26 14,34 20,40 C26,34 40,26 40,16 C40,2 25,0 20,10 Z"/>
+  </g>
+
+  <!-- 17. Speciality: Chef Hat (right side) -->
+  <g transform="translate(1300, 960) scale(0.95)" class="bd">
+    <path d="M15,35 H45 V42 H15 Z"/>
+    <path d="M15,35 C10,25 15,15 24,18 C27,10 38,10 40,18 C48,15 52,25 45,35"/>
+  </g>
+
+  <!-- 18. Above CTA Banner: Donut (left) -->
+  <g transform="translate(45, 1180) scale(0.95)" class="bd">
+    <circle cx="30" cy="30" r="22"/>
+    <circle cx="30" cy="30" r="8"/>
+    <circle cx="24" cy="20" r="1.5" fill="#6b95cf"/>
+    <circle cx="38" cy="22" r="1.5" fill="#6b95cf"/>
+    <circle cx="34" cy="38" r="1.5" fill="#6b95cf"/>
+  </g>
+
+  <!-- 19. Above CTA Banner: Wheat (right) -->
+  <g transform="translate(1290, 1190) rotate(-20) scale(1.05)" class="bd">
+    <path d="M15,75 Q18,40 22,5"/>
+    <path d="M22,5 C18,12 12,16 18,20 C20,16 22,12 22,5 Z"/>
+    <path d="M21,16 C25,22 30,24 26,28 C22,26 21,22 21,16 Z"/>
+    <path d="M19,26 C15,31 10,34 15,38 C18,35 19,31 19,26 Z"/>
+  </g>
+
+  <!-- 20. Below CTA: Rolling Pin (left) -->
+  <g transform="translate(40, 1420) rotate(35) scale(1.0)" class="bd">
+    <rect x="20" y="10" width="65" height="18" rx="3"/>
+    <line x1="8" y1="19" x2="20" y2="19" stroke-width="2.5"/>
+    <line x1="85" y1="19" x2="97" y2="19" stroke-width="2.5"/>
+  </g>
+
+  <!-- 21. Below CTA: Croissant (right) -->
+  <g transform="translate(1280, 1430) rotate(15) scale(1.0)" class="bd">
+    <path d="M10,32 C5,22 15,10 32,8 C48,6 65,14 75,28 C68,23 50,20 32,22 C18,24 12,30 10,32 Z"/>
+    <path d="M25,23 C28,15 42,12 52,17"/>
+  </g>
+
+  <!-- 22. Footer area: Red Heart Outline (left) -->
+  <g transform="translate(110, 1680) rotate(-10) scale(0.9)" class="rd">
+    <path d="M20,10 C15,0 0,2 0,16 C0,26 14,34 20,40 C26,34 40,26 40,16 C40,2 25,0 20,10 Z"/>
+  </g>
+
+  <!-- 23. Footer area: Red Heart Outline (right) -->
+  <g transform="translate(1190, 1680) rotate(15) scale(0.9)" class="rd">
+    <path d="M20,10 C15,0 0,2 0,16 C0,26 14,34 20,40 C26,34 40,26 40,16 C40,2 25,0 20,10 Z"/>
+  </g>
+
+  <!-- 24. Footer area: Rolling Pin (right) -->
+  <g transform="translate(1250, 1710) rotate(-30) scale(0.9)" class="bd">
+    <rect x="20" y="10" width="60" height="16" rx="3"/>
+    <line x1="8" y1="18" x2="20" y2="18" stroke-width="2.5"/>
+    <line x1="80" y1="18" x2="92" y2="18" stroke-width="2.5"/>
+  </g>
+</svg>
