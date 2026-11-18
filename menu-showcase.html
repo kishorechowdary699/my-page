@@ -1,0 +1,1185 @@
+<!-- 
+  ============================================================
+  BREAD & BEYOND — Interactive Split-Screen Menu Showcase
+  ============================================================
+  
+  HOW TO INTEGRATE INTO YOUR MAIN index.html:
+  1. Copy the <link> tag and <style> block into your <head>
+  2. Replace the existing #menu section with this component's HTML
+  3. Add the <script src="menu-data.js"> before </body>
+  4. Add the <script> block for MenuShowcase before </body>
+  
+  Or simply link this file as a standalone page.
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Showcase | Bread & Beyond</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ===== Inherited Brand Variables ===== */
+:root {
+  --navy: #13263F;
+  --navy-dark: #0f2138;
+  --navy-banner: #132742;
+  --red: #A82828;
+  --red-hover: #8f2020;
+  --white: #ffffff;
+  --text-muted: #586e88;
+  --accent-blue: #5886C4;
+  --border-blue: #7ba2d8;
+
+  /* Split-screen showcase palette (derived from brand) */
+  --showcase-left: #0f1f35;       /* Rich deep navy for left panel */
+  --showcase-left-text: #c8d8ec;  /* Muted light on dark */
+  --showcase-right: #dce8f6;      /* Light complementary blue for right panel */
+  --showcase-right-text: #13263F; /* Navy text on light bg */
+  --showcase-accent: #A82828;     /* Red accent */
+  --showcase-border: #5886C4;     /* Blue border pattern */
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--navy);
+  background: #eaf1fa;
+}
+
+/* ===== MENU SHOWCASE SECTION ===== */
+.menu-showcase-section {
+  padding: 35px 0 0;
+}
+.menu-showcase-section .container {
+  width: min(1140px, 92%);
+  margin: 0 auto;
+}
+
+/* Section Header */
+.menu-showcase-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.menu-showcase-header .script-tag {
+  font-family: 'Caveat', cursive;
+  color: var(--red);
+  font-size: 1.45rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.menu-showcase-header h2 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 2.4rem;
+  color: var(--navy);
+  margin-top: 4px;
+}
+
+/* ===== SHOWCASE WRAPPER ===== */
+.showcase-wrapper {
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(19, 38, 63, 0.15);
+  position: relative;
+  background: var(--showcase-left);
+}
+
+/* ===== CATEGORY TABS ===== */
+.showcase-category-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: rgba(15, 31, 53, 0.95);
+  border-bottom: 1px solid rgba(88, 134, 196, 0.15);
+  position: relative;
+  z-index: 10;
+}
+.showcase-logo-mark {
+  width: 32px;
+  height: 32px;
+  background: var(--red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.showcase-logo-mark i {
+  color: white;
+  font-size: 14px;
+}
+.category-tabs {
+  display: flex;
+  gap: 0;
+  list-style: none;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.category-tabs::-webkit-scrollbar { display: none; }
+.category-tab {
+  padding: 16px 20px;
+  color: rgba(200, 216, 236, 0.6);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.3s, border-color 0.3s;
+  border-bottom: 2.5px solid transparent;
+  white-space: nowrap;
+  font-family: 'Poppins', sans-serif;
+}
+.category-tab:hover {
+  color: rgba(200, 216, 236, 0.85);
+}
+.category-tab.active {
+  color: var(--white);
+  border-bottom-color: var(--red);
+}
+
+/* ===== SPLIT SCREEN LAYOUT ===== */
+.showcase-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 480px;
+  position: relative;
+}
+
+/* Left Panel */
+.showcase-left {
+  background: var(--showcase-left);
+  padding: 50px 140px 50px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+.showcase-item-content {
+  position: relative;
+}
+.item-subtitle {
+  font-family: 'Caveat', cursive;
+  color: var(--accent-blue);
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.item-subtitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.item-title {
+  font-family: 'Fredoka', sans-serif;
+  color: var(--white);
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1.05;
+  margin-bottom: 18px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s;
+}
+.item-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.item-description {
+  color: var(--showcase-left-text);
+  font-size: 0.82rem;
+  line-height: 1.75;
+  max-width: 340px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+}
+.item-description.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Right Panel */
+.showcase-right {
+  background: var(--showcase-right);
+  padding: 50px 40px 50px 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.showcase-price-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 250px;
+}
+.item-price-label {
+  font-family: 'Caveat', cursive;
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  margin-bottom: 2px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+}
+.item-price-label.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.item-price {
+  font-family: 'Fredoka', sans-serif;
+  color: var(--navy);
+  font-size: 3.4rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 22px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+}
+.item-price.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Order / Enquire Button */
+.btn-enquire {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--red);
+  color: var(--white);
+  padding: 13px 28px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: all 0.25s;
+  box-shadow: 0 4px 15px rgba(168, 40, 40, 0.3);
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.4s ease 0.3s, transform 0.4s ease 0.3s, background 0.25s, box-shadow 0.25s;
+}
+.btn-enquire.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.btn-enquire:hover {
+  background: var(--red-hover);
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(168, 40, 40, 0.4);
+}
+
+/* ===== CENTER SEAM — CIRCULAR PRODUCT IMAGE ===== */
+.showcase-center-seam {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+/* Peek items (previous / next) */
+.peek-item {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  opacity: 0.5;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: opacity 0.4s, transform 0.4s, border-color 0.3s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+.peek-item:hover {
+  opacity: 0.85;
+  transform: scale(1.08);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.peek-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.peek-item.empty {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Main Product Image */
+.main-product-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid var(--white);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(88, 134, 196, 0.2);
+  position: relative;
+  pointer-events: auto;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.main-product-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.main-product-circle.animating img {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* ===== NAV ARROWS ===== */
+.showcase-nav {
+  position: absolute;
+  z-index: 25;
+  pointer-events: auto;
+}
+.nav-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: rgba(15, 31, 53, 0.6);
+  backdrop-filter: blur(6px);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+  pointer-events: auto;
+}
+.nav-arrow:hover {
+  background: var(--red);
+  border-color: var(--red);
+  transform: scale(1.1);
+}
+.nav-arrow.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+.nav-arrow-up {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.nav-arrow-down {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ===== ITEM COUNTER ===== */
+.item-counter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.counter-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(88, 134, 196, 0.3);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.counter-dot.active {
+  background: var(--red);
+  width: 24px;
+  border-radius: 4px;
+}
+.counter-dot:hover:not(.active) {
+  background: rgba(88, 134, 196, 0.6);
+}
+
+/* ===== DECORATIVE BORDER (bottom edge) ===== */
+.showcase-decorative-border {
+  height: 18px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--red) 0%, #c44a2d 25%, var(--red) 50%, #c44a2d 75%, var(--red) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.showcase-decorative-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Repeating diamond/ethnic pattern */
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 8px,
+    rgba(255,255,255,0.15) 8px,
+    rgba(255,255,255,0.15) 10px,
+    transparent 10px,
+    transparent 18px
+  );
+}
+.showcase-decorative-border::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255,215,0,0.6) 0px,
+    rgba(255,215,0,0.6) 4px,
+    transparent 4px,
+    transparent 14px,
+    rgba(255,215,0,0.6) 14px,
+    rgba(255,215,0,0.6) 18px,
+    transparent 18px,
+    transparent 28px
+  );
+  transform: translateY(-50%);
+}
+
+/* ===== TRANSITION OVERLAY ===== */
+.transition-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0;
+}
+.transition-overlay.active {
+  animation: flashTransition 0.4s ease;
+}
+@keyframes flashTransition {
+  0% { opacity: 0; }
+  50% { opacity: 0.1; background: white; }
+  100% { opacity: 0; }
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* Menu Showcase - Tablet (769px to 960px) */
+@media (max-width: 960px) and (min-width: 769px) {
+  .showcase-split {
+    min-height: 420px;
+  }
+  .showcase-left {
+    padding: 40px 115px 40px 35px;
+  }
+  .showcase-right {
+    padding: 40px 30px 40px 115px;
+  }
+  .item-title {
+    font-size: 2.5rem;
+  }
+  .item-price {
+    font-size: 2.7rem;
+  }
+  .main-product-circle {
+    width: 165px;
+    height: 165px;
+  }
+  .peek-item {
+    width: 75px;
+    height: 75px;
+  }
+  .category-tab {
+    padding: 14px 16px;
+    font-size: 0.68rem;
+  }
+}
+
+/* Menu Showcase - Mobile & Small Tablets (≤768px) */
+@media (max-width: 768px) {
+  .showcase-wrapper {
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+    background: linear-gradient(180deg, #152945 0%, #0f1f35 40%, #0c182a 100%);
+    box-shadow: 0 12px 35px rgba(15, 31, 53, 0.25);
+    border-radius: 20px;
+  }
+  .showcase-category-bar {
+    padding: 10px 10px;
+    background: rgba(10, 20, 36, 0.98);
+    position: relative;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    border-bottom: 1px solid rgba(88, 134, 196, 0.2);
+    display: flex;
+    justify-content: flex-start;
+  }
+  .showcase-category-bar::-webkit-scrollbar {
+    display: none;
+  }
+  .showcase-logo-mark {
+    display: none;
+  }
+  .category-tabs {
+    display: flex;
+    gap: 6px;
+    padding: 2px 4px;
+    width: max-content;
+  }
+  .category-tab {
+    padding: 7px 15px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    color: rgba(200, 216, 236, 0.75);
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    border-bottom: none;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+  .category-tab:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.15);
+  }
+  .category-tab.active {
+    color: #ffffff;
+    background: var(--red);
+    box-shadow: 0 2px 10px rgba(168, 40, 40, 0.45);
+    border-bottom: none;
+  }
+
+  .showcase-split {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    position: relative;
+    padding: 0 0 10px;
+  }
+  .showcase-center-seam {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    order: 1;
+    margin: 16px auto 6px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    z-index: 5;
+    pointer-events: auto;
+  }
+  .main-product-circle {
+    width: 140px;
+    height: 140px;
+    border-width: 4px;
+    border-color: #ffffff;
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
+  }
+  .peek-item {
+    width: 50px;
+    height: 50px;
+    opacity: 0.35;
+    border-width: 2px;
+  }
+  .nav-arrow-up, .nav-arrow-down {
+    display: none;
+  }
+  .showcase-left {
+    order: 2;
+    padding: 6px 18px 2px;
+    text-align: center;
+    align-items: center;
+    background: transparent;
+  }
+  .showcase-item-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .item-subtitle {
+    font-size: 1.3rem;
+    color: #7ba2d8;
+    margin-bottom: 2px;
+  }
+  .item-title {
+    font-size: 1.85rem;
+    margin-bottom: 6px;
+    line-height: 1.1;
+  }
+  .item-description {
+    max-width: 295px;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    margin: 0 auto;
+    color: #b8cde4;
+  }
+  .showcase-right {
+    order: 3;
+    padding: 6px 18px 12px;
+    align-items: center;
+    text-align: center;
+    background: transparent;
+  }
+  .showcase-price-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .item-price-label {
+    display: none;
+  }
+  .item-price {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: var(--white);
+  }
+  .btn-enquire {
+    padding: 11px 28px;
+    font-size: 0.78rem;
+    box-shadow: 0 4px 14px rgba(168, 40, 40, 0.4);
+  }
+  .swipe-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: rgba(200, 216, 236, 0.65);
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    margin: 4px auto 8px;
+    order: 4;
+  }
+  .swipe-hint i {
+    font-size: 0.65rem;
+    color: var(--accent-blue);
+    animation: bounceSwipe 1.5s infinite;
+  }
+  @keyframes bounceSwipe {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(3px); }
+  }
+  .item-counter {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    order: 5;
+    margin: 0 auto 10px;
+  }
+  .mobile-nav-arrows {
+    display: none !important;
+  }
+}
+
+/* ===== Mobile Nav Arrows (hidden on desktop) ===== */
+.mobile-nav-arrows {
+  display: none;
+}
+
+/* ===== Placeholder image styling ===== */
+.placeholder-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #dce8f6 0%, #c8d8ec 100%);
+  color: var(--navy);
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Menu Showcase Section ===== -->
+<section class="menu-showcase-section" id="menu">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="menu-showcase-header">
+      <span class="script-tag">Our Menu ♡</span>
+      <h2>Explore Our Creations</h2>
+    </div>
+
+    <!-- Showcase Component -->
+    <div class="showcase-wrapper" id="menuShowcase">
+      
+      <!-- Category Navigation Bar -->
+      <div class="showcase-category-bar">
+        <div class="showcase-logo-mark">
+          <i class="fas fa-bread-slice"></i>
+        </div>
+        <ul class="category-tabs" id="categoryTabs">
+          <!-- Populated by JS -->
+        </ul>
+      </div>
+
+      <!-- Split Screen -->
+      <div class="showcase-split" id="showcaseSplit">
+        
+        <!-- LEFT PANEL: Product Info -->
+        <div class="showcase-left">
+          <div class="showcase-item-content">
+            <div class="item-subtitle" id="itemSubtitle"></div>
+            <h2 class="item-title" id="itemTitle"></h2>
+            <p class="item-description" id="itemDescription"></p>
+          </div>
+        </div>
+
+        <!-- CENTER SEAM: Circular Images -->
+        <div class="showcase-center-seam" id="centerSeam">
+          <!-- Previous Peek -->
+          <div class="peek-item" id="peekPrev" title="Previous item">
+            <img src="" alt="Previous item">
+          </div>
+
+          <!-- Main Product Image -->
+          <div class="main-product-circle" id="mainProductCircle">
+            <img src="" alt="Product" id="mainProductImg">
+            <!-- Nav Arrows -->
+            <div class="nav-arrow nav-arrow-up" id="arrowUp" title="Previous">
+              <i class="fas fa-chevron-up"></i>
+            </div>
+            <div class="nav-arrow nav-arrow-down" id="arrowDown" title="Next">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+
+          <!-- Next Peek -->
+          <div class="peek-item" id="peekNext" title="Next item">
+            <img src="" alt="Next item">
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL: Price & Action -->
+        <div class="showcase-right">
+          <div class="showcase-price-box">
+            <div class="item-price-label" id="itemPriceLabel">Price</div>
+            <div class="item-price" id="itemPrice"></div>
+            <a class="btn-enquire" id="btnEnquire" href="https://wa.me/917842177972" target="_blank">
+              <i class="fab fa-whatsapp"></i> ORDER NOW
+            </a>
+          </div>
+        </div>
+
+        <!-- Mobile swipe hint -->
+        <div class="swipe-hint" id="swipeHint">
+          <i class="fas fa-chevron-left"></i>
+          <span>Swipe to explore items</span>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+
+        <!-- Transition overlay -->
+        <div class="transition-overlay" id="transitionOverlay"></div>
+
+        <!-- Item counter dots -->
+        <div class="item-counter" id="itemCounter"></div>
+      </div>
+
+      <!-- Mobile Navigation Arrows -->
+      <div class="mobile-nav-arrows" id="mobileNavArrows">
+        <div class="nav-arrow" id="mobileArrowPrev" title="Previous">
+          <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="nav-arrow" id="mobileArrowNext" title="Next">
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+
+      <!-- Decorative Border -->
+      <div class="showcase-decorative-border"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Menu Data -->
+<script src="menu-data.js"></script>
+
+<!-- Menu Showcase Logic -->
+<script>
+(function() {
+  'use strict';
+
+  // ── State ──
+  let currentCategoryIndex = 0;
+  let currentItemIndex = 0;
+  let isAnimating = false;
+
+  // ── DOM References ──
+  const categoryTabsEl = document.getElementById('categoryTabs');
+  const itemSubtitle = document.getElementById('itemSubtitle');
+  const itemTitle = document.getElementById('itemTitle');
+  const itemDescription = document.getElementById('itemDescription');
+  const itemPrice = document.getElementById('itemPrice');
+  const itemPriceLabel = document.getElementById('itemPriceLabel');
+  const btnEnquire = document.getElementById('btnEnquire');
+  const mainProductImg = document.getElementById('mainProductImg');
+  const mainProductCircle = document.getElementById('mainProductCircle');
+  const peekPrev = document.getElementById('peekPrev');
+  const peekNext = document.getElementById('peekNext');
+  const arrowUp = document.getElementById('arrowUp');
+  const arrowDown = document.getElementById('arrowDown');
+  const itemCounter = document.getElementById('itemCounter');
+  const transitionOverlay = document.getElementById('transitionOverlay');
+  const mobileArrowPrev = document.getElementById('mobileArrowPrev');
+  const mobileArrowNext = document.getElementById('mobileArrowNext');
+  const showcaseSplit = document.getElementById('showcaseSplit');
+
+  // ── Build Category Tabs ──
+  function buildCategoryTabs() {
+    categoryTabsEl.innerHTML = '';
+    MENU_DATA.forEach((cat, i) => {
+      const li = document.createElement('li');
+      li.className = 'category-tab' + (i === currentCategoryIndex ? ' active' : '');
+      li.textContent = cat.category;
+      li.addEventListener('click', () => switchCategory(i));
+      categoryTabsEl.appendChild(li);
+    });
+  }
+
+  // ── Build Item Counter Dots ──
+  function buildCounter() {
+    const items = MENU_DATA[currentCategoryIndex].items;
+    itemCounter.innerHTML = '';
+    items.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'counter-dot' + (i === currentItemIndex ? ' active' : '');
+      dot.addEventListener('click', () => goToItem(i));
+      itemCounter.appendChild(dot);
+    });
+  }
+
+  // ── Get image src with fallback placeholder ──
+  function getImageSrc(item) {
+    return item.image || '';
+  }
+
+  // ── Handle image error (show placeholder) ──
+  function handleImageError(img, label) {
+    img.onerror = null;
+    // Create a data URL placeholder
+    const canvas = document.createElement('canvas');
+    canvas.width = 400;
+    canvas.height = 400;
+    const ctx = canvas.getContext('2d');
+    // Gradient background
+    const grad = ctx.createLinearGradient(0, 0, 400, 400);
+    grad.addColorStop(0, '#dce8f6');
+    grad.addColorStop(1, '#b8cfea');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(200, 200, 200, 0, Math.PI * 2);
+    ctx.fill();
+    // Icon
+    ctx.fillStyle = '#5886C4';
+    ctx.font = 'bold 48px Fredoka, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('🍞', 200, 170);
+    // Label
+    ctx.fillStyle = '#13263F';
+    ctx.font = '600 20px Poppins, sans-serif';
+    ctx.fillText(label || 'Coming Soon', 200, 230);
+    img.src = canvas.toDataURL();
+  }
+
+  // ── Render Current Item ──
+  function renderItem(animate = true) {
+    const cat = MENU_DATA[currentCategoryIndex];
+    const item = cat.items[currentItemIndex];
+    const items = cat.items;
+
+    // Remove visible classes for animation
+    if (animate) {
+      itemSubtitle.classList.remove('visible');
+      itemTitle.classList.remove('visible');
+      itemDescription.classList.remove('visible');
+      itemPrice.classList.remove('visible');
+      itemPriceLabel.classList.remove('visible');
+      btnEnquire.classList.remove('visible');
+    }
+
+    // Set content
+    setTimeout(() => {
+      itemSubtitle.textContent = item.subtitle;
+      itemTitle.textContent = item.title;
+      itemDescription.textContent = item.description;
+      itemPrice.textContent = item.price;
+
+      // Main product image
+      mainProductImg.src = getImageSrc(item);
+      mainProductImg.alt = item.title;
+      mainProductImg.onerror = function() { handleImageError(this, item.title); };
+
+      // Peek previous
+      if (currentItemIndex > 0) {
+        const prev = items[currentItemIndex - 1];
+        peekPrev.classList.remove('empty');
+        const prevImg = peekPrev.querySelector('img');
+        prevImg.src = getImageSrc(prev);
+        prevImg.alt = prev.title;
+        prevImg.onerror = function() { handleImageError(this, prev.title); };
+      } else {
+        peekPrev.classList.add('empty');
+      }
+
+      // Peek next
+      if (currentItemIndex < items.length - 1) {
+        const next = items[currentItemIndex + 1];
+        peekNext.classList.remove('empty');
+        const nextImg = peekNext.querySelector('img');
+        nextImg.src = getImageSrc(next);
+        nextImg.alt = next.title;
+        nextImg.onerror = function() { handleImageError(this, next.title); };
+      } else {
+        peekNext.classList.add('empty');
+      }
+
+      // Arrow states
+      arrowUp.classList.toggle('disabled', currentItemIndex === 0);
+      arrowDown.classList.toggle('disabled', currentItemIndex === items.length - 1);
+      mobileArrowPrev.classList.toggle('disabled', currentItemIndex === 0);
+      mobileArrowNext.classList.toggle('disabled', currentItemIndex === items.length - 1);
+
+      // Update counter dots
+      buildCounter();
+
+      // Animate in
+      if (animate) {
+        requestAnimationFrame(() => {
+          itemSubtitle.classList.add('visible');
+          itemTitle.classList.add('visible');
+          itemDescription.classList.add('visible');
+          itemPrice.classList.add('visible');
+          itemPriceLabel.classList.add('visible');
+          btnEnquire.classList.add('visible');
+        });
+
+        // Product image scale animation
+        mainProductCircle.classList.add('animating');
+        setTimeout(() => mainProductCircle.classList.remove('animating'), 600);
+      } else {
+        // Show immediately
+        itemSubtitle.classList.add('visible');
+        itemTitle.classList.add('visible');
+        itemDescription.classList.add('visible');
+        itemPrice.classList.add('visible');
+        itemPriceLabel.classList.add('visible');
+        btnEnquire.classList.add('visible');
+      }
+
+      // WhatsApp message
+      const msg = encodeURIComponent(`Hi! I'd like to enquire about ${item.title} (${item.price}) from your ${cat.category} menu.`);
+      btnEnquire.href = `https://wa.me/917842177972?text=${msg}`;
+
+    }, animate ? 150 : 0);
+  }
+
+  // ── Switch Category ──
+  function switchCategory(index) {
+    if (index === currentCategoryIndex || isAnimating) return;
+    isAnimating = true;
+    currentCategoryIndex = index;
+    currentItemIndex = 0;
+
+    // Update tab highlights
+    const tabs = document.querySelectorAll('.category-tab');
+    tabs.forEach((tab, i) => {
+      tab.classList.toggle('active', i === index);
+      if (i === index && typeof tab.scrollIntoView === 'function') {
+        tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    });
+
+    // Flash transition
+    transitionOverlay.classList.add('active');
+    setTimeout(() => transitionOverlay.classList.remove('active'), 400);
+
+    renderItem(true);
+    setTimeout(() => { isAnimating = false; }, 600);
+  }
+
+  // ── Go to specific item ──
+  function goToItem(index) {
+    if (index === currentItemIndex || isAnimating) return;
+    const items = MENU_DATA[currentCategoryIndex].items;
+    if (index < 0 || index >= items.length) return;
+
+    isAnimating = true;
+    currentItemIndex = index;
+    renderItem(true);
+    setTimeout(() => { isAnimating = false; }, 600);
+  }
+
+  // ── Next / Prev ──
+  function nextItem() {
+    const items = MENU_DATA[currentCategoryIndex].items;
+    if (currentItemIndex < items.length - 1) {
+      goToItem(currentItemIndex + 1);
+    } else {
+      goToItem(0); // Seamless loop to first
+    }
+  }
+  function prevItem() {
+    const items = MENU_DATA[currentCategoryIndex].items;
+    if (currentItemIndex > 0) {
+      goToItem(currentItemIndex - 1);
+    } else {
+      goToItem(items.length - 1); // Seamless loop to last
+    }
+  }
+
+  // ── Event Listeners ──
+  arrowUp.addEventListener('click', (e) => { e.stopPropagation(); prevItem(); });
+  arrowDown.addEventListener('click', (e) => { e.stopPropagation(); nextItem(); });
+  mobileArrowPrev.addEventListener('click', prevItem);
+  mobileArrowNext.addEventListener('click', nextItem);
+  peekPrev.addEventListener('click', prevItem);
+  peekNext.addEventListener('click', nextItem);
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    const rect = document.getElementById('menuShowcase').getBoundingClientRect();
+    if (rect.top > window.innerHeight || rect.bottom < 0) return;
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); prevItem(); }
+    else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); nextItem(); }
+  });
+
+  // ── Touch Swipe & Mouse Drag Gestures ──
+  const showcaseWrapper = document.getElementById('menuShowcase');
+  let startX = 0, startY = 0;
+  let currentX = 0, currentY = 0;
+  let isDragging = false;
+  let startTime = 0;
+
+  function handleGestureStart(e) {
+    if (e.target.closest('a, button, .category-tab')) return;
+    const touch = e.touches ? e.touches[0] : e;
+    startX = touch.clientX;
+    startY = touch.clientY;
+    currentX = startX;
+    currentY = startY;
+    startTime = Date.now();
+    isDragging = true;
+  }
+
+  function handleGestureMove(e) {
+    if (!isDragging) return;
+    const touch = e.touches ? e.touches[0] : e;
+    currentX = touch.clientX;
+    currentY = touch.clientY;
+    const dx = currentX - startX;
+    const dy = currentY - startY;
+
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+      if (e.cancelable) e.preventDefault();
+      const pull = Math.max(-30, Math.min(30, dx * 0.3));
+      mainProductCircle.style.transform = `scale(1.03) translateX(${pull}px)`;
+    }
+  }
+
+  function handleGestureEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    mainProductCircle.style.transform = '';
+
+    const dx = currentX - startX;
+    const dy = currentY - startY;
+    const dt = Date.now() - startTime;
+    const absDx = Math.abs(dx);
+    const absDy = Math.abs(dy);
+
+    const threshold = (dt < 250 && absDx > 20) ? 20 : 28;
+
+    if (absDx >= threshold && absDx >= absDy) {
+      if (dx < 0) {
+        nextItem();
+      } else {
+        prevItem();
+      }
+    } else if (absDy >= 40 && absDy > absDx) {
+      if (dy < 0) {
+        nextItem();
+      } else {
+        prevItem();
+      }
+    }
+  }
+
+  showcaseWrapper.addEventListener('touchstart', handleGestureStart, { passive: true });
+  showcaseWrapper.addEventListener('touchmove', handleGestureMove, { passive: false });
+  showcaseWrapper.addEventListener('touchend', handleGestureEnd, { passive: true });
+  showcaseWrapper.addEventListener('touchcancel', handleGestureEnd, { passive: true });
+
+  showcaseWrapper.addEventListener('mousedown', handleGestureStart);
+  window.addEventListener('mousemove', (e) => {
+    if (isDragging) handleGestureMove(e);
+  });
+  window.addEventListener('mouseup', () => {
+    if (isDragging) handleGestureEnd();
+  });
+
+  // Trackpad / Mouse wheel navigation
+  let wheelTimeout = null;
+  showcaseWrapper.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 15) {
+      if (wheelTimeout) return;
+      wheelTimeout = setTimeout(() => { wheelTimeout = null; }, 350);
+      e.deltaX > 0 ? nextItem() : prevItem();
+    } else if (Math.abs(e.deltaY) > 35) {
+      if (wheelTimeout) return;
+      wheelTimeout = setTimeout(() => { wheelTimeout = null; }, 400);
+      e.deltaY > 0 ? nextItem() : prevItem();
+    }
+  }, { passive: true });
+
+  // ── Initialize ──
+  buildCategoryTabs();
+  renderItem(false);
+
+  positionCenterSeam();
+  window.addEventListener('resize', positionCenterSeam);
+
+})();
+</script>
+
+</body>
+</html>
