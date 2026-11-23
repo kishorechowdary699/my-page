@@ -1583,7 +1583,7 @@ footer {
     margin-bottom: 10px;
     color: var(--white);
   }
-  .btn-enquire {
+  .btn-enquire, .btn-showcase-add {
     padding: 11px 28px;
     font-size: 0.78rem;
     box-shadow: 0 4px 14px rgba(168, 40, 40, 0.4);
@@ -1866,6 +1866,13 @@ footer {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.4s ease 0.3s, transform 0.4s ease 0.3s;
+}
+.showcase-action-wrap.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 .btn-showcase-add {
   display: inline-flex;
@@ -1881,8 +1888,12 @@ footer {
   border: none;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(168, 40, 40, 0.3);
-  transition: all 0.25s;
+  transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
   font-family: 'Poppins', sans-serif;
+}
+.btn-showcase-add.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 .btn-showcase-add:hover {
   background: var(--red-hover);
@@ -3202,7 +3213,6 @@ const BreadAndBeyondCart = (function() {
     let itemsHtml = '<div class="cart-items-container">';
     items.forEach(item => {
       const lineSubtotal = '₹' + (item.price * item.quantity).toLocaleString('en-IN');
-      const safeTitle = item.title.replace(/'/g, "\'");
       itemsHtml += `
         <div class="cart-item" data-id="${item.title}">
           <img src="${item.image}" alt="${item.title}" class="cart-item-img" onerror="this.src='images/milk-bread.jpg'">
@@ -3211,14 +3221,14 @@ const BreadAndBeyondCart = (function() {
             <div class="cart-item-price-each">₹${item.price.toLocaleString('en-IN')} each</div>
             <div class="cart-item-bottom">
               <div class="cart-item-qty-control">
-                <button class="drawer-qty-btn" type="button" onclick="BreadAndBeyondCart.updateQuantity('${safeTitle}', -1)" aria-label="Decrease">&minus;</button>
+                <button class="drawer-qty-btn drawer-qty-minus" type="button" aria-label="Decrease">&minus;</button>
                 <span class="drawer-qty-num">${item.quantity}</span>
-                <button class="drawer-qty-btn" type="button" onclick="BreadAndBeyondCart.updateQuantity('${safeTitle}', 1)" aria-label="Increase">&plus;</button>
+                <button class="drawer-qty-btn drawer-qty-plus" type="button" aria-label="Increase">&plus;</button>
               </div>
               <div class="cart-item-subtotal">${lineSubtotal}</div>
             </div>
           </div>
-          <button class="cart-item-remove" type="button" onclick="BreadAndBeyondCart.removeItem('${safeTitle}')" title="Remove" aria-label="Remove">
+          <button class="cart-item-remove drawer-remove-btn" type="button" title="Remove" aria-label="Remove">
             <i class="fas fa-trash-alt"></i>
           </button>
         </div>
@@ -3359,8 +3369,7 @@ const BreadAndBeyondCart = (function() {
       lines.push(`Notes: ${notes}`);
     }
 
-    const message = lines.join('
-');
+    const message = lines.join('\n');
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   }
@@ -3397,6 +3406,25 @@ const BreadAndBeyondCart = (function() {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeDrawer();
     });
+
+    // Cart drawer items event delegation
+    const drawerBody = document.getElementById('cartDrawerBody');
+    if (drawerBody) {
+      drawerBody.addEventListener('click', (e) => {
+        const itemEl = e.target.closest('.cart-item');
+        if (!itemEl) return;
+        const title = itemEl.getAttribute('data-id');
+        if (!title) return;
+
+        if (e.target.closest('.drawer-qty-plus')) {
+          updateQuantity(title, 1);
+        } else if (e.target.closest('.drawer-qty-minus')) {
+          updateQuantity(title, -1);
+        } else if (e.target.closest('.drawer-remove-btn')) {
+          removeItem(title);
+        }
+      });
+    }
 
     // Speciality cards event delegation
     const specialityGrid = document.querySelector('.speciality-grid');
@@ -3460,6 +3488,7 @@ const BreadAndBeyondCart = (function() {
   const itemPrice = document.getElementById('itemPrice');
   const itemPriceLabel = document.getElementById('itemPriceLabel');
   const btnShowcaseAdd = document.getElementById('btnShowcaseAdd');
+  const showcaseActionWrap = document.getElementById('showcaseActionWrap');
   const showcaseQtyControl = document.getElementById('showcaseQtyControl');
   const showcaseQtyNum = document.getElementById('showcaseQtyNum');
   const showcaseQtyMinus = document.getElementById('showcaseQtyMinus');
@@ -3557,6 +3586,7 @@ const BreadAndBeyondCart = (function() {
       itemPrice.classList.remove('visible');
       itemPriceLabel.classList.remove('visible');
       if (btnShowcaseAdd) btnShowcaseAdd.classList.remove('visible');
+      if (showcaseActionWrap) showcaseActionWrap.classList.remove('visible');
     }
 
     setTimeout(() => {
@@ -3610,6 +3640,7 @@ const BreadAndBeyondCart = (function() {
           itemPrice.classList.add('visible');
           itemPriceLabel.classList.add('visible');
           if (btnShowcaseAdd) btnShowcaseAdd.classList.add('visible');
+          if (showcaseActionWrap) showcaseActionWrap.classList.add('visible');
         });
         mainProductCircle.classList.add('animating');
         setTimeout(() => mainProductCircle.classList.remove('animating'), 600);
@@ -3620,6 +3651,7 @@ const BreadAndBeyondCart = (function() {
         itemPrice.classList.add('visible');
         itemPriceLabel.classList.add('visible');
         if (btnShowcaseAdd) btnShowcaseAdd.classList.add('visible');
+        if (showcaseActionWrap) showcaseActionWrap.classList.add('visible');
       }
     }, animate ? 150 : 0);
   }
